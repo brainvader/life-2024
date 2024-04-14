@@ -28,7 +28,7 @@
 
 .grid .label {
     box-sizing: border-box;
-    border: 1px solid black;
+    border-right: 1px solid black;
 }
 
 .grid:first-child  .label{
@@ -41,7 +41,6 @@
 
 .grid > input {
     flex-grow: 1;
-    justify-content: center;
     text-align: center;    
 }
 
@@ -51,11 +50,5 @@ fieldset.grid {
 }
 
 fieldset.grid legend {
-    display: block;
     float: left;
-    flex-grow: 0;
-}
-
-fieldset.grid > input {
-    flex-grow: 1;
 }
