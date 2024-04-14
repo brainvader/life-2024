@@ -1,0 +1,7 @@
+.useInfoItem {
+    margin-right: 1px;
+}
+
+.useInfoItem span::before{
+    content: " ";
+}
