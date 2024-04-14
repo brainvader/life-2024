@@ -41,6 +41,8 @@ export const CARE_LEVELS: Readonly<CareLevel[]> = ["要支援1", "要支援2", "
 
 export type Age = | "男" | "女";
 
+export const AGE: Readonly<Age>[] = ["男", "女"] as const
+
 export type EvaluationPoint = "サービス利用開始時" | "サービス利用中" | "サービス利用終了時";
 
 export type IndependenceLevelWithDisabilities =
