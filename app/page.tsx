@@ -1,6 +1,7 @@
 import UserInfo from '@/components/user-info';
 import styles from '../styles/page.module.css'
 import BasicInfo from '@/components/basic-info';
+import OralNutritionInfo from '@/components/oral-nutrition-info';
 
 export default function Home() {
   return (
@@ -10,9 +11,15 @@ export default function Home() {
         <h2>【利用者情報】</h2>
         <UserInfo />
       </section>
-      <section>
+
+      <section className={styles.section}>
         <h2>【基本情報】</h2>
         <BasicInfo />
+      </section>
+
+      <section className={styles.section}>
+        <h2>【口腔・栄養】</h2>
+        <OralNutritionInfo />
       </section>
     </main>
   );

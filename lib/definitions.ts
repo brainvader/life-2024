@@ -43,6 +43,22 @@ export type EvaluationPoint = "サービス利用開始時" | "サービス利�
 
 export const EVALUATION_POINT: Readonly<EvaluationPoint>[] = ["サービス利用開始時", "サービス利用中", "サービス利用終了時"] as const;
 
+export type Denture = "あり" | "なし";
+
+export const DENTURE: Readonly<Denture>[] = ["あり", "なし"];
+
+export type Stain = Denture;
+
+export const STAIN = DENTURE;
+
+export type Choke = Denture;
+
+export const CHOKE = DENTURE;
+
+export type Gum = Denture;
+
+export const GUM = DENTURE;
+
 export type Dementia = | "アルツハイマー病" | "血管性認知症" | "レビー小体病" | "その他"
 
 export type Family = | "同居" | "独居"

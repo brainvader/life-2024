@@ -1,0 +1,45 @@
+.container {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 25%);
+    border: 1px solid black;
+}
+
+.container * {
+    box-sizing: border-box;
+}
+
+.grid:nth-child(odd) {
+    grid-column: 1/3;
+}
+
+.grid:nth-child(even) {
+    grid-column: 3/5;
+}
+
+.grid  {
+    display: inline-flex;
+    border: 1px solid black;
+}
+
+.grid .label {
+    box-sizing: border-box;
+    border-right: 1px solid black;
+    width: 40%;
+}
+
+.grid legend.label {
+    float: left;
+}
+
+.grid > input {
+    flex-grow: 1;
+    justify-content: center;
+    text-align: center;    
+}
+
+
+
+fieldset.grid {
+    column-gap: 10%;
+}
