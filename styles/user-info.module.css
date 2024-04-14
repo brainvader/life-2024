@@ -32,11 +32,11 @@
 }
 
 .grid:first-child  .label{
-    width: 12.5%;
+    width: 20%;
 }
 
 .grid:not(:first-child) > .label {
-    width: 25%;
+    width: 40%;
 }
 
 .grid > input {
