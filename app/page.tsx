@@ -3,6 +3,7 @@ import styles from '../styles/page.module.css'
 import BasicInfo from '@/components/basic-info';
 import OralNutritionInfo from '@/components/oral-nutrition-info';
 import VitalityIndex from '@/components/vitality-index';
+import General from '@/components/general';
 
 export default function Home() {
   return (
@@ -16,6 +17,11 @@ export default function Home() {
       <section className={styles.section}>
         <h2>【基本情報】</h2>
         <BasicInfo />
+      </section>
+
+      <section className={styles.section}>
+        <h2>【総論】</h2>
+        <General />
       </section>
 
       <section className={styles.section}>
