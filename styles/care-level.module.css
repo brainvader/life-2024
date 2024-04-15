@@ -1,0 +1,18 @@
+.fieldset {
+    width: 100%;
+
+    border: 1px solid black;
+
+    display: inline-flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: stretch;
+}
+
+.legend {
+    width: 10%;
+    display: block;
+    float: left;
+    border-right: 1px black solid;
+}
