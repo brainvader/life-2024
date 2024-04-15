@@ -2,6 +2,7 @@ import UserInfo from '@/components/user-info';
 import styles from '../styles/page.module.css'
 import BasicInfo from '@/components/basic-info';
 import OralNutritionInfo from '@/components/oral-nutrition-info';
+import VitalityIndex from '@/components/vitality-index';
 
 export default function Home() {
   return (
@@ -20,6 +21,11 @@ export default function Home() {
       <section className={styles.section}>
         <h2>【口腔・栄養】</h2>
         <OralNutritionInfo />
+      </section>
+
+      <section className={styles.section}>
+        <h2>【Vitality Index】</h2>
+        <VitalityIndex />
       </section>
     </main>
   );
