@@ -1,6 +1,6 @@
 import { User } from "../definitions";
 
-export const user: User = {
+export const dummyUser: User = {
     name: "氏　名前",
     kana: "うじ　なまえ",
     birthday: {
