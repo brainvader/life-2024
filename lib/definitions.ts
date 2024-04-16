@@ -61,7 +61,8 @@ export const COMPLAINT: Readonly<Complaint>[] = ["発熱", "転倒", "その他"
 // 緊急入院の状況
 export type Hospitalizations = {
     start: Date,
-    complaints: Complaint
+    complaints: Complaint,
+    reason: string,
 }
 
 // 家族
