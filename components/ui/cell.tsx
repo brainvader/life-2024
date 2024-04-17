@@ -51,7 +51,7 @@ type SelectCellCellProps = {
     labelText: string,
     options: Readonly<string>[],
     gridSpan: GridSpan,
-    onChange: (event: ChangeEvent<HTMLInputElement>) => void
+    onChange: (event: ChangeEvent<HTMLSelectElement>) => void
 }
 
 export function SelectCell({ id, labelText, options, gridSpan, onChange }: SelectCellCellProps) {
