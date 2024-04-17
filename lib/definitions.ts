@@ -168,7 +168,7 @@ export type User = {
     careLevel: CareLevel,
     independenceLevelWithDisabilities: IndependenceLevelWithDisabilities,
     independenceLevelWithDementia: IndependenceLevelWithDementia,
-    evaluationDay: string,
+    evaluationDay: Date,
     evaluationPoint: EvaluationPoint,
     diagnosis: string[],
     hospitalizations: Hospitalizations[],
