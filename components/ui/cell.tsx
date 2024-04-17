@@ -22,10 +22,10 @@ type TextInputCellProps = {
     labelText: string,
     defaultValue: string,
     gridSpan: GridSpan,
-    onChange?: (event: ChangeEvent<HTMLInputElement>) => void
+    onChange: (event: ChangeEvent<HTMLInputElement>) => void
 }
 
-export function TextInputCell({ id, type, labelText, defaultValue, gridSpan }: TextInputCellProps) {
+export function TextInputCell({ id, type, labelText, defaultValue, gridSpan, onChange }: TextInputCellProps) {
     const { col, row } = gridSpan;
 
     return (
@@ -34,7 +34,13 @@ export function TextInputCell({ id, type, labelText, defaultValue, gridSpan }: T
                 <CellLabel id={id} labelText={labelText} />
             </div>
             <div className={`col-span-${col} row-span-${row} border-r-2 border-b-2 border-solid border-black`}>
-                <input className="w-full text-center" type={type} id={id} defaultValue={defaultValue}></input>
+                <input
+                    className="w-full text-center"
+                    type={type}
+                    id={id}
+                    defaultValue={defaultValue}
+                    onChange={(event) => { onChange(event) }}
+                />
             </div >
         </>)
 
