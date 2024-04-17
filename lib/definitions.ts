@@ -17,9 +17,9 @@ export type CareLevel =
 export const CARE_LEVELS: Readonly<CareLevel[]> = ["要支援1", "要支援2", "要介護1", "要介護2", "要介護3", "要介護4", "要介護5"] as const;
 
 // 性別
-export type Age = | "男" | "女";
+export type Sex = | "男" | "女";
 
-export const AGE: Readonly<Age>[] = ["男", "女"] as const
+export const SEX: Readonly<Sex>[] = ["男", "女"] as const
 
 // 障害高齢者の日常生活自立度
 export type IndependenceLevelWithDisabilities =
@@ -61,7 +61,8 @@ export const COMPLAINT: Readonly<Complaint>[] = ["発熱", "転倒", "その他"
 // 緊急入院の状況
 export type Hospitalizations = {
     start: Date,
-    complaints: Complaint
+    complaints: Complaint,
+    reason: string,
 }
 
 // 家族
@@ -161,7 +162,7 @@ export type User = {
     name: string,
     kana: string,
     birthday: Date,
-    age: Age,
+    sex: Sex,
     insurerNumber: string,
     insuredNumber: string,
     careLevel: CareLevel,

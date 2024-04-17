@@ -6,7 +6,7 @@ export const dummyUser: User = {
     birthday: {
         yyyy: "2024", mm: "05", dd: "10"
     },
-    age: "男",
+    sex: "男",
     insurerNumber: "",
     insuredNumber: "",
     careLevel: "要介護1",
@@ -18,15 +18,18 @@ export const dummyUser: User = {
     hospitalizations: [
         {
             start: { yyyy: "2024", mm: "10", dd: "11" },
-            complaints: "その他"
+            complaints: "その他",
+            reason: ""
         },
         {
             start: { yyyy: "2024", mm: "05", dd: "30" },
-            complaints: "発熱"
+            complaints: "発熱",
+            reason: ""
         },
         {
             start: { yyyy: "2020", mm: "03", dd: "05" },
-            complaints: "転倒"
+            complaints: "転倒",
+            reason: ""
         }
     ],
     medicine: ["", "", ""],
