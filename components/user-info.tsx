@@ -29,6 +29,20 @@ export default function UserInfo() {
         })
     }
 
+    const setBirthday = (event: ChangeEvent<HTMLInputElement>) => {
+        const newBirthday = event.target.value;
+        const [yyyy, mm, dd] = newBirthday.split("-")
+
+        setUser({
+            ...user,
+            birthday: {
+                yyyy: yyyy,
+                mm: mm,
+                dd: dd
+            },
+        })
+    }
+
     const setInsurerNumber = (event: ChangeEvent<HTMLInputElement>) => {
         const newInsurerNumber = event.target.value;
 
@@ -70,7 +84,9 @@ export default function UserInfo() {
                 type="date"
                 id="user-birthday"
                 labelText="生年月日"
-                defaultValue={`${yyyy}-${mm}-${dd}`} gridSpan={{ col: 1, row: 1 }} />
+                defaultValue={`${yyyy}-${mm}-${dd}`} gridSpan={{ col: 1, row: 1 }}
+                onChange={(event) => { setBirthday(event) }}
+            />
             <TextInputCell
                 type="text"
                 id="insurer-number"
