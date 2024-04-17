@@ -5,6 +5,11 @@ type GridSpan = {
     row: number,
 }
 
+type CellSpan = {
+    labelSpan: GridSpan,
+    controlSpan: GridSpan
+}
+
 type InputType = "text" | "date";
 
 type CellLabelProps = {
@@ -21,19 +26,19 @@ type TextInputCellProps = {
     type: InputType,
     labelText: string,
     defaultValue: string,
-    gridSpan: GridSpan,
+    cellSpan: CellSpan,
     onChange: (event: ChangeEvent<HTMLInputElement>) => void
 }
 
-export function TextInputCell({ id, type, labelText, defaultValue, gridSpan, onChange }: TextInputCellProps) {
-    const { col, row } = gridSpan;
+export function TextInputCell({ id, type, labelText, defaultValue, cellSpan, onChange }: TextInputCellProps) {
+    const { labelSpan, controlSpan } = cellSpan;
 
     return (
         <>
-            <div className={`col-span-${col} row-span-${row} border-r-2 border-b-2 border-solid border-black`}>
+            <div className={`col-span-${labelSpan.col} row-span-${labelSpan.row} border-r-2 border-b-2 border-solid border-black`}>
                 <CellLabel id={id} labelText={labelText} />
             </div>
-            <div className={`col-span-${col} row-span-${row} border-r-2 border-b-2 border-solid border-black`}>
+            <div className={`col-span-${controlSpan.col} row-span-${controlSpan.row} border-r-2 border-b-2 border-solid border-black`}>
                 <input
                     className="w-full text-center"
                     type={type}
@@ -50,19 +55,19 @@ type SelectCellCellProps = {
     id: string,
     labelText: string,
     options: Readonly<string>[],
-    gridSpan: GridSpan,
+    cellSpan: CellSpan,
     onChange: (event: ChangeEvent<HTMLSelectElement>) => void
 }
 
-export function SelectCell({ id, labelText, options, gridSpan, onChange }: SelectCellCellProps) {
-    const { col, row } = gridSpan;
+export function SelectCell({ id, labelText, options, cellSpan, onChange }: SelectCellCellProps) {
+    const { labelSpan, controlSpan } = cellSpan;
 
     return (
         <>
-            <div className={`col-span-${col} row-span-${row} border-r-2 border-b-2 border-solid border-black pl-1`}>
+            <div className={`col-span-${labelSpan.col} row-span-${labelSpan.row} border-r-2 border-b-2 border-solid border-black pl-1`}>
                 <CellLabel id={id} labelText={labelText} />
             </div>
-            <div className={`col-span-${col} row-span-${row} border-r-2 border-b-2 border-solid border-black`}>
+            <div className={`col-span-${controlSpan.col} row-span-${controlSpan.row} border-r-2 border-b-2 border-solid border-black`}>
                 <select
                     className="w-full text-center bg-white appearance-none"
                     id={id}

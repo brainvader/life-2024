@@ -77,14 +77,24 @@ export default function UserInfo() {
                 type="text"
                 id="user-name"
                 labelText="氏名"
-                defaultValue={user.name} gridSpan={{ col: 1, row: 1 }}
+                defaultValue={user.name}
+                cellSpan={
+                    {
+                        labelSpan: { col: 1, row: 1 },
+                        controlSpan: { col: 1, row: 1 }
+                    }}
                 onChange={(event) => { setName(event) }}
             />
             <TextInputCell
                 type="text"
                 id="user-kana"
                 labelText="ふりがな"
-                defaultValue={user.kana} gridSpan={{ col: 1, row: 1 }}
+                defaultValue={user.kana}
+                cellSpan={
+                    {
+                        labelSpan: { col: 1, row: 1 },
+                        controlSpan: { col: 1, row: 1 }
+                    }}
                 onChange={(event) => { setKana(event) }}
             />
 
@@ -93,14 +103,24 @@ export default function UserInfo() {
                 type="date"
                 id="user-birthday"
                 labelText="生年月日"
-                defaultValue={`${yyyy}-${mm}-${dd}`} gridSpan={{ col: 1, row: 1 }}
+                defaultValue={`${yyyy}-${mm}-${dd}`}
+                cellSpan={
+                    {
+                        labelSpan: { col: 1, row: 1 },
+                        controlSpan: { col: 1, row: 1 }
+                    }}
                 onChange={(event) => { setBirthday(event) }}
             />
             <TextInputCell
                 type="text"
                 id="insurer-number"
                 labelText="保険者番号"
-                defaultValue={user.insurerNumber} gridSpan={{ col: 1, row: 1 }}
+                defaultValue={user.insurerNumber}
+                cellSpan={
+                    {
+                        labelSpan: { col: 1, row: 1 },
+                        controlSpan: { col: 1, row: 1 }
+                    }}
                 onChange={(event) => { setInsurerNumber(event) }}
             />
 
@@ -109,14 +129,23 @@ export default function UserInfo() {
                 id="sex"
                 labelText="性別"
                 options={SEX}
-                gridSpan={{ col: 1, row: 1 }}
+                cellSpan={
+                    {
+                        labelSpan: { col: 1, row: 1 },
+                        controlSpan: { col: 1, row: 1 }
+                    }}
                 onChange={(event) => { selectSex(event) }}
             />
             <TextInputCell
                 type="text"
                 id="insured-number"
                 labelText="被保険者番号"
-                defaultValue={user.insuredNumber} gridSpan={{ col: 1, row: 1 }}
+                defaultValue={user.insuredNumber}
+                cellSpan={
+                    {
+                        labelSpan: { col: 1, row: 1 },
+                        controlSpan: { col: 1, row: 1 }
+                    }}
                 onChange={(event) => { setInsuredNumber(event) }}
             />
         </div >
