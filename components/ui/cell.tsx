@@ -51,10 +51,10 @@ type SelectCellCellProps = {
     labelText: string,
     options: Readonly<string>[],
     gridSpan: GridSpan,
-    onChange?: (event: ChangeEvent<HTMLInputElement>) => void
+    onChange: (event: ChangeEvent<HTMLInputElement>) => void
 }
 
-export function SelectCell({ id, labelText, options, gridSpan }: SelectCellCellProps) {
+export function SelectCell({ id, labelText, options, gridSpan, onChange }: SelectCellCellProps) {
     const { col, row } = gridSpan;
 
     return (
@@ -63,7 +63,10 @@ export function SelectCell({ id, labelText, options, gridSpan }: SelectCellCellP
                 <CellLabel id={id} labelText={labelText} />
             </div>
             <div className={`col-span-${col} row-span-${row} border-r-2 border-b-2 border-solid border-black`}>
-                <select className="w-full text-center bg-white appearance-none" id={id}>
+                <select
+                    className="w-full text-center bg-white appearance-none"
+                    id={id}
+                    onChange={(event) => onChange(event)}>
                     {options.map((option, i) => {
                         return (<option key={i} value={option}>{option}</option>)
                     })}
