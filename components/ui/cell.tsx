@@ -35,7 +35,7 @@ export function TextInputCell({ id, type, labelText, defaultValue, cellSpan, onC
 
     return (
         <>
-            <div className={`col-span-${labelSpan.col} row-span-${labelSpan.row} border-r-2 border-b-2 border-solid border-black`}>
+            <div className={`col-span-${labelSpan.col} row-span-${labelSpan.row} border-r-2 border-b-2 border-solid border-black pl-1`}>
                 <CellLabel id={id} labelText={labelText} />
             </div>
             <div className={`col-span-${controlSpan.col} row-span-${controlSpan.row} border-r-2 border-b-2 border-solid border-black`}>
