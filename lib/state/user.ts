@@ -12,7 +12,9 @@ export const dummyUser: User = {
     careLevel: "要介護1",
     independenceLevelWithDisabilities: "自立",
     independenceLevelWithDementia: "自立",
-    evaluationDay: "2024/04/01",
+    evaluationDay: {
+        yyyy: "2024", mm: "04", dd: "12"
+    },
     evaluationPoint: "サービス利用中",
     diagnosis: ["", "", ""],
     hospitalizations: [
