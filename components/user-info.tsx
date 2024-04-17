@@ -2,7 +2,7 @@
 
 import { AGE } from "@/lib/definitions"
 import { UserContext } from "@/lib/state/user-provider"
-import { useContext } from "react"
+import { ChangeEvent, useContext } from "react"
 import { SelectCell, TextInputCell } from "./ui/cell";
 
 
@@ -20,6 +20,15 @@ export default function UserInfo() {
         })
     }
 
+    const setKana = (event: ChangeEvent<HTMLInputElement>) => {
+        const newKana = event.target.value;
+
+        setUser({
+            ...user,
+            kana: newKana,
+        })
+    }
+
     return (
         <div className="grid grid-cols-4 grid-rows-3 border-4 border-solid border-black box-border">
             {/* first row */}
@@ -34,7 +43,9 @@ export default function UserInfo() {
                 type="text"
                 id="user-kana"
                 labelText="ふりがな"
-                defaultValue={user.kana} gridSpan={{ col: 1, row: 1 }} />
+                defaultValue={user.kana} gridSpan={{ col: 1, row: 1 }}
+                onChange={(event) => { setKana(event) }}
+            />
 
             {/* second rows */}
             <TextInputCell
