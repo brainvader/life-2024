@@ -37,6 +37,16 @@ export default function UserInfo() {
             insurerNumber: newInsurerNumber,
         })
     }
+
+    const setInsuredNumber = (event: ChangeEvent<HTMLInputElement>) => {
+        const newInsuredNumber = event.target.value;
+
+        setUser({
+            ...user,
+            insuredNumber: newInsuredNumber,
+        })
+    }
+
     return (
         <div className="grid grid-cols-4 grid-rows-3 border-4 border-solid border-black box-border">
             {/* first row */}
@@ -79,7 +89,9 @@ export default function UserInfo() {
                 type="text"
                 id="insured-number"
                 labelText="被保険者番号"
-                defaultValue={user.insuredNumber} gridSpan={{ col: 1, row: 1 }} />
+                defaultValue={user.insuredNumber} gridSpan={{ col: 1, row: 1 }}
+                onChange={(event) => { setInsuredNumber(event) }}
+            />
         </div >
     )
 }
