@@ -11,6 +11,15 @@ export default function UserInfo() {
 
     const { yyyy, mm, dd } = user.birthday;
 
+    const setName = (event: ChangeEvent<HTMLInputElement>) => {
+        const newName = event.target.value;
+
+        setUser({
+            ...user,
+            name: newName,
+        })
+    }
+
     return (
         <div className="grid grid-cols-4 grid-rows-3 border-4 border-solid border-black box-border">
             {/* first row */}
@@ -18,7 +27,9 @@ export default function UserInfo() {
                 type="text"
                 id="user-name"
                 labelText="氏名"
-                defaultValue={user.name} gridSpan={{ col: 1, row: 1 }} />
+                defaultValue={user.name} gridSpan={{ col: 1, row: 1 }}
+                onChange={(event) => { setName(event) }}
+            />
             <TextInputCell
                 type="text"
                 id="user-kana"
