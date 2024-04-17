@@ -1,6 +1,6 @@
 'use client'
 
-import { AGE } from "@/lib/definitions"
+import { SEX, Sex } from "@/lib/definitions"
 import { UserContext } from "@/lib/state/user-provider"
 import { ChangeEvent, useContext } from "react"
 import { SelectCell, TextInputCell } from "./ui/cell";
@@ -40,6 +40,15 @@ export default function UserInfo() {
                 mm: mm,
                 dd: dd
             },
+        })
+    }
+
+    const selectSex = (event: ChangeEvent<HTMLSelectElement>) => {
+        const newOption = event.target.value as Sex;
+
+        setUser({
+            ...user,
+            sex: newOption
         })
     }
 
@@ -101,6 +110,7 @@ export default function UserInfo() {
                 labelText="性別"
                 options={SEX}
                 gridSpan={{ col: 1, row: 1 }}
+                onChange={(event) => { selectSex(event) }}
             />
             <TextInputCell
                 type="text"
