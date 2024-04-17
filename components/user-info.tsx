@@ -99,8 +99,9 @@ export default function UserInfo() {
             <SelectCell
                 id="sex"
                 labelText="性別"
-                options={AGE}
-                gridSpan={{ col: 1, row: 1 }} />
+                options={SEX}
+                gridSpan={{ col: 1, row: 1 }}
+            />
             <TextInputCell
                 type="text"
                 id="insured-number"

@@ -6,7 +6,7 @@ export const dummyUser: User = {
     birthday: {
         yyyy: "2024", mm: "05", dd: "10"
     },
-    age: "男",
+    sex: "男",
     insurerNumber: "",
     insuredNumber: "",
     careLevel: "要介護1",
