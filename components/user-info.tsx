@@ -29,6 +29,14 @@ export default function UserInfo() {
         })
     }
 
+    const setInsurerNumber = (event: ChangeEvent<HTMLInputElement>) => {
+        const newInsurerNumber = event.target.value;
+
+        setUser({
+            ...user,
+            insurerNumber: newInsurerNumber,
+        })
+    }
     return (
         <div className="grid grid-cols-4 grid-rows-3 border-4 border-solid border-black box-border">
             {/* first row */}
@@ -57,7 +65,9 @@ export default function UserInfo() {
                 type="text"
                 id="insurer-number"
                 labelText="保険者番号"
-                defaultValue={user.insurerNumber} gridSpan={{ col: 1, row: 1 }} />
+                defaultValue={user.insurerNumber} gridSpan={{ col: 1, row: 1 }}
+                onChange={(event) => { setInsurerNumber(event) }}
+            />
 
             {/* third rows */}
             <SelectCell
