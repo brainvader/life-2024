@@ -149,6 +149,8 @@ export type Discharge =
     | "時々、尿意便意を伝える"
     | "排便に全く関心がない"
 
+export const DISCHARGE: Readonly<Discharge>[] = ["いつも自ら便意尿意を伝える、あるいは自分で排尿、排便を行う", "時々、尿意便意を伝える", "排便に全く関心がない"]
+
 // リハビリ・活動
 export type Rehabilitation =
     | "自らリハビリに向かう、活動を求める"

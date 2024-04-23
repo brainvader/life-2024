@@ -3,7 +3,7 @@
 import { SelectCell } from './ui/cell';
 import { ChangeEvent, useContext } from 'react';
 import { UserContext } from '@/lib/state/user-provider';
-import { Communication, COMMUNICATION, WAKE_UP, WakeUp } from '@/lib/definitions';
+import { Communication, COMMUNICATION, Discharge, DISCHARGE, WAKE_UP, WakeUp } from '@/lib/definitions';
 
 export default function VitalityIndex() {
     const { user, setUser } = useContext(UserContext)
@@ -32,6 +32,18 @@ export default function VitalityIndex() {
         })
     }
 
+    const selectDischarge = (event: ChangeEvent<HTMLSelectElement>) => {
+        const newOption = event.target.value as Discharge;
+
+        setUser({
+            ...user,
+            vitalityIndex: {
+                ...user.vitalityIndex,
+                discharge: newOption
+            }
+        })
+    }
+
     return (
         <div className="grid grid-cols-4 grid-rows-3 border-4 border-solid border-black box-border">
             <SelectCell
@@ -56,17 +68,18 @@ export default function VitalityIndex() {
                 onChange={(event) => { selectWakeup(event) }}
             />
 
-            {/* <div className={styles.label}>
-                <label htmlFor="wake-up-select">起床</label>
-            </div>
-            <div className={styles.inputField}>
-                <select name="起床" id="wake-up-select">
-                    <option value="いつも定時に起床している">いつも定時に起床している </option>
-                    <option value="起こさないと起床しないことがある">起こさないと起床しないことがある</option>
-                    <option value="自分から起床することはない">自分から起床することはない</option>
-                </select>
-            </div>
+            <SelectCell
+                id='discharge'
+                labelText='排泄'
+                options={DISCHARGE}
+                cellSpan={{
+                    labelSpan: { col: 1, row: 1 },
+                    controlSpan: { col: 3, row: 1 }
+                }}
+                onChange={(event) => { selectDischarge(event) }}
+            />
 
+            {/* 
             <div className={styles.label}>
                 <label htmlFor="excretion-select">排泄</label>
             </div>
