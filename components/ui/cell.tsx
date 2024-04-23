@@ -54,12 +54,13 @@ export function TextInputCell({ id, type, labelText, defaultValue, cellSpan, onC
 type SelectCellCellProps = {
     id: string,
     labelText: string,
+    defaultValue?: string,
     options: Readonly<string>[],
     cellSpan: CellSpan,
     onChange: (event: ChangeEvent<HTMLSelectElement>) => void
 }
 
-export function SelectCell({ id, labelText, options, cellSpan, onChange }: SelectCellCellProps) {
+export function SelectCell({ id, labelText, defaultValue, options, cellSpan, onChange }: SelectCellCellProps) {
     const { labelSpan, controlSpan } = cellSpan;
 
     return (
@@ -71,6 +72,7 @@ export function SelectCell({ id, labelText, options, cellSpan, onChange }: Selec
                 <select
                     className="w-full text-center bg-white appearance-none"
                     id={id}
+                    defaultValue={defaultValue!}
                     onChange={(event) => onChange(event)}>
                     {options.map((option, i) => {
                         return (<option key={i} value={option}>{option}</option>)
