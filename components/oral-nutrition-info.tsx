@@ -84,7 +84,7 @@ export default function OralNutritionInfo() {
                     labelSpan: { col: 1, row: 1 },
                     controlSpan: { col: 1, row: 1 }
                 }}
-                onChange={(event) => { }}
+                onChange={(event) => { setWeight(event) }}
             />
             <SelectCell
                 id='denture'
@@ -111,7 +111,7 @@ export default function OralNutritionInfo() {
             <SelectCell
                 id='stain'
                 labelText='歯の汚れ'
-                options={CHOKE}
+                options={STAIN}
                 cellSpan={{
                     labelSpan: { col: 1, row: 1 },
                     controlSpan: { col: 1, row: 1 }
