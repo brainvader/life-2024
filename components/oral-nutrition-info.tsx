@@ -1,3 +1,5 @@
+'use client'
+
 import { CHOKE, DENTURE, GUM, STAIN } from '@/lib/definitions'
 import styles from '../styles/oral-nutrition-info.module.css'
 import { RadioGroup } from './ui/radio-group'
