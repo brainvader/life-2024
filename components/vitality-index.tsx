@@ -1,10 +1,9 @@
 'use client'
 
-import { COMMUNICATION } from '@/lib/data/vitality-index';
 import { SelectCell } from './ui/cell';
 import { ChangeEvent, useContext } from 'react';
 import { UserContext } from '@/lib/state/user-provider';
-import { Communication } from '@/lib/definitions';
+import { Communication, COMMUNICATION } from '@/lib/definitions';
 
 export default function VitalityIndex() {
     const { user, setUser } = useContext(UserContext)
