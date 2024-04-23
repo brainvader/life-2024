@@ -3,14 +3,34 @@
 import { CHOKE, DENTURE, GUM, STAIN } from '@/lib/definitions'
 import styles from '../styles/oral-nutrition-info.module.css'
 import { RadioGroup } from './ui/radio-group'
+import { TextInputCell } from './ui/cell'
+import { ChangeEvent, useContext } from 'react';
+import { UserContext } from '@/lib/state/user-provider';
 
 export default function OralNutritionInfo() {
+    const { user, setUser } = useContext(UserContext);
+
+    const setHeight = (event: ChangeEvent<HTMLInputElement>) => {
+        const newHeight = Number(event.target.value);
+
+        setUser({
+            ...user,
+            height: newHeight,
+        })
+    }
+
     return (
-        <div className={styles.container}>
-            <label className={styles.grid}>
-                <span className={styles.label}>身長</span>
-                <input type="text" />
-            </label>
+        <div className="grid grid-cols-4 grid-rows-3 border-4 border-solid border-black box-border">
+            <TextInputCell
+                type='text'
+                id='height'
+                labelText='身長'
+                defaultValue={`${user.height}`}
+                cellSpan={{
+                    labelSpan: { col: 1, row: 1 },
+                    controlSpan: { col: 1, row: 1 }
+                }}
+                onChange={(event) => { setHeight(event) }} />
             <label className={styles.grid}>
                 <span className={styles.label}>体重</span>
                 <input type="text" />
