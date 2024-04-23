@@ -141,6 +141,8 @@ export type WakeUp =
     | "起こさないと起床しないことがある"
     | "自分から起床することはない"
 
+export const WAKE_UP: Readonly<WakeUp>[] = ["いつも定時に起床している", "起こさないと起床しないことがある", "自分から起床することはない"]
+
 // 排便
 export type Discharge =
     | "いつも自ら便意尿意を伝える、あるいは自分で排尿、排便を行う"
