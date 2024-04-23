@@ -134,10 +134,14 @@ export type Communication =
     | "挨拶、呼びかけに対して返答や笑顔が見られる"
     | "反応がない"
 
+export const COMMUNICATION: Readonly<Communication>[] = ["自分から挨拶する、話しかける", "挨拶、呼びかけに対して返答や笑顔が見られる", "反応がない"]
+
 export type WakeUp =
     | "いつも定時に起床している"
     | "起こさないと起床しないことがある"
     | "自分から起床することはない"
+
+export const WAKE_UP: Readonly<WakeUp>[] = ["いつも定時に起床している", "起こさないと起床しないことがある", "自分から起床することはない"]
 
 // 排便
 export type Discharge =
@@ -145,11 +149,15 @@ export type Discharge =
     | "時々、尿意便意を伝える"
     | "排便に全く関心がない"
 
+export const DISCHARGE: Readonly<Discharge>[] = ["いつも自ら便意尿意を伝える、あるいは自分で排尿、排便を行う", "時々、尿意便意を伝える", "排便に全く関心がない"]
+
 // リハビリ・活動
 export type Rehabilitation =
     | "自らリハビリに向かう、活動を求める"
     | "促されて向かう"
     | "拒否、無関心"
+
+export const REHABILITATION: Readonly<Rehabilitation>[] = ["自らリハビリに向かう、活動を求める", "促されて向かう", "拒否、無関心"]
 
 export type VitalityIndex = {
     communication: Communication,
