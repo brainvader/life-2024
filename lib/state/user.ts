@@ -58,7 +58,10 @@ export const dummyUser: User = {
     choke: "なし",
     stain: "あり",
     gum: "あり",
-    dementia: null,
+    dementia: {
+        type: "その他",
+        cause: ""
+    },
     vitalityIndex: {
         communication: "自分から挨拶する、話しかける",
         wakeUp: "いつも定時に起床している",

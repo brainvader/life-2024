@@ -129,6 +129,8 @@ export const GUM = DENTURE;
 // 認知症の診断
 export type Dementia = | "アルツハイマー病" | "血管性認知症" | "レビー小体病" | "その他";
 
+export const DEMENTIA: Readonly<Dementia>[] = ["アルツハイマー病", "血管性認知症", "レビー小体病", "その他"]
+
 export type Communication =
     | "自分から挨拶する、話しかける"
     | "挨拶、呼びかけに対して返答や笑顔が見られる"
@@ -190,6 +192,9 @@ export type User = {
     choke: Choke,
     stain: Stain,
     gum: Gum,
-    dementia: Dementia | null,
+    dementia: {
+        type: Dementia,
+        cause: string
+    },
     vitalityIndex: VitalityIndex
 }
