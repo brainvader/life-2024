@@ -3,7 +3,7 @@
 import { SelectCell } from './ui/cell';
 import { ChangeEvent, useContext } from 'react';
 import { UserContext } from '@/lib/state/user-provider';
-import { Communication, COMMUNICATION } from '@/lib/definitions';
+import { Communication, COMMUNICATION, WAKE_UP, WakeUp } from '@/lib/definitions';
 
 export default function VitalityIndex() {
     const { user, setUser } = useContext(UserContext)
@@ -20,6 +20,18 @@ export default function VitalityIndex() {
         })
     }
 
+    const selectWakeup = (event: ChangeEvent<HTMLSelectElement>) => {
+        const newOption = event.target.value as WakeUp;
+
+        setUser({
+            ...user,
+            vitalityIndex: {
+                ...user.vitalityIndex,
+                wakeUp: newOption
+            }
+        })
+    }
+
     return (
         <div className="grid grid-cols-4 grid-rows-3 border-4 border-solid border-black box-border">
             <SelectCell
@@ -31,6 +43,17 @@ export default function VitalityIndex() {
                     controlSpan: { col: 3, row: 1 }
                 }}
                 onChange={(event) => { selectCommunication(event) }}
+            />
+
+            <SelectCell
+                id='wake-up'
+                labelText='起床'
+                options={WAKE_UP}
+                cellSpan={{
+                    labelSpan: { col: 1, row: 1 },
+                    controlSpan: { col: 3, row: 1 }
+                }}
+                onChange={(event) => { selectWakeup(event) }}
             />
 
             {/* <div className={styles.label}>
