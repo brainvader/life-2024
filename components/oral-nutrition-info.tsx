@@ -19,6 +19,15 @@ export default function OralNutritionInfo() {
         })
     }
 
+    const setWeight = (event: ChangeEvent<HTMLInputElement>) => {
+        const newWegith = Number(event.target.value);
+
+        setUser({
+            ...user,
+            weight: newWegith,
+        })
+    }
+
     return (
         <div className="grid grid-cols-4 grid-rows-3 border-4 border-solid border-black box-border">
             <TextInputCell
@@ -30,11 +39,19 @@ export default function OralNutritionInfo() {
                     labelSpan: { col: 1, row: 1 },
                     controlSpan: { col: 1, row: 1 }
                 }}
-                onChange={(event) => { setHeight(event) }} />
-            <label className={styles.grid}>
-                <span className={styles.label}>体重</span>
-                <input type="text" />
-            </label>
+                onChange={(event) => { setHeight(event) }}
+            />
+            <TextInputCell
+                type='text'
+                id='weight'
+                labelText='体重'
+                defaultValue={`${user.weight}`}
+                cellSpan={{
+                    labelSpan: { col: 1, row: 1 },
+                    controlSpan: { col: 1, row: 1 }
+                }}
+                onChange={(event) => { }}
+            />
             <fieldset className={styles.grid}>
                 <legend className={styles.label}>義歯の使用</legend>
                 <RadioGroup name="denture" labels={DENTURE} />
