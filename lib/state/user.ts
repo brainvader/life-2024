@@ -38,7 +38,7 @@ export const dummyUser: User = {
     family: "同居",
     adl: {
         eating: "自立",
-        transferring: "座れるが移れない",
+        transfer: "座れるが移れない",
         grooming: "自立",
         toileting: "自立",
         bathing: "自立",

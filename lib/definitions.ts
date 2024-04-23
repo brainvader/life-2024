@@ -68,18 +68,26 @@ export type Hospitalizations = {
 // 家族
 export type Family = | "同居" | "独居";
 
+export const FAMILY: Readonly<Family>[] = ["同居", "独居"];
+
 // ADL全般
 export type ADLLevel = "自立" | "一部介助" | "全介助";
+
+export const ADL_LEVEL: Readonly<ADLLevel>[] = ["自立", "一部介助", "全介助"];
 
 // 移乗
 export type TransferLevel = "自立" | "監視下" | "座れるが移れない" | "全介助";
 
+export const TRANSFER_LEVEL: Readonly<TransferLevel>[] = ["自立", "監視下", "座れるが移れない", "全介助"];
+
 // 平地歩行
 export type WalkLevel = "自立" | "歩行器等";
 
+export const WALK_LEVEL: Readonly<WalkLevel>[] = ["自立", "歩行器等"];
+
 export type ADL = {
     eating: ADLLevel, // 食事
-    transferring: TransferLevel, // 移乗
+    transfer: TransferLevel, // 移乗
     grooming: ADLLevel, // 整容
     toileting: ADLLevel, // トイレ動作
     bathing: ADLLevel, // 入浴
@@ -89,6 +97,19 @@ export type ADL = {
     bladderControl: ADLLevel, // 排尿コントロール
     bowelsControl: ADLLevel, // 排便コントロール
 };
+
+export const ADLMap: Record<keyof ADL, string> = {
+    eating: "食事",
+    transfer: "椅子とベッド間の移乗",
+    grooming: "整容",
+    toileting: "トイレ動作",
+    bathing: "入浴",
+    walking: "平地歩行",
+    stairs: "階段昇降",
+    dressing: "更衣",
+    bladderControl: "排尿コントロール",
+    bowelsControl: "排便コントロール"
+}
 
 // サービス利用
 export type EndReason =
@@ -100,6 +121,8 @@ export type EndReason =
     | "死亡"
     | "介護サービス利用をしなくなった"
     | "その他"
+
+export const END_REASON: Readonly<EndReason>[] = ["居宅サービスの利用", "介護老人福祉施設入所", "介護老人保健施設入所", "介護医療院入所", "医療機関入院", "死亡", "介護サービス利用をしなくなった", "その他"];
 
 export type End = {
     date: Date,
