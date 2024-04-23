@@ -1,46 +1,40 @@
+'use client'
+
 import { COMMUNICATION } from '@/lib/data/vitality-index';
-import styles from '../styles/vitality-index.module.css';
-
-type SelectProps = {
-    id: string,
-    name: string,
-    label: string,
-    options: Readonly<string>[]
-}
-
-function Select({ id, name, label, options }: SelectProps) {
-    const optionList = () => {
-        return (
-            options.map((option, index) => {
-                return <option key={index} value={option} >{option}</option>
-            })
-        )
-    }
-    return (
-        <>
-            <div className={styles.label}>
-                <label htmlFor={id}>{label}</label>
-            </div>
-            <div className={styles.inputField}>
-                <select id={id} name={name} >
-                    {optionList()}
-                </select>
-            </div>
-        </>
-
-    )
-}
+import { SelectCell } from './ui/cell';
+import { ChangeEvent, useContext } from 'react';
+import { UserContext } from '@/lib/state/user-provider';
+import { Communication } from '@/lib/definitions';
 
 export default function VitalityIndex() {
-    return (
-        <div className={styles.container}>
-            <Select
-                id='communication-select'
-                name='communication'
-                label='意思疎通'
-                options={COMMUNICATION} />
+    const { user, setUser } = useContext(UserContext)
 
-            <div className={styles.label}>
+    const selectCommunication = (event: ChangeEvent<HTMLSelectElement>) => {
+        const newOption = event.target.value as Communication;
+
+        setUser({
+            ...user,
+            vitalityIndex: {
+                ...user.vitalityIndex,
+                communication: newOption
+            }
+        })
+    }
+
+    return (
+        <div className="grid grid-cols-4 grid-rows-3 border-4 border-solid border-black box-border">
+            <SelectCell
+                id='communiaction'
+                labelText='意思疎通'
+                options={COMMUNICATION}
+                cellSpan={{
+                    labelSpan: { col: 1, row: 1 },
+                    controlSpan: { col: 3, row: 1 }
+                }}
+                onChange={(event) => { selectCommunication(event) }}
+            />
+
+            {/* <div className={styles.label}>
                 <label htmlFor="wake-up-select">起床</label>
             </div>
             <div className={styles.inputField}>
@@ -83,7 +77,7 @@ export default function VitalityIndex() {
                         拒否、無関心
                     </option>
                 </select>
-            </div>
+            </div> */}
         </div>
     )
 }
