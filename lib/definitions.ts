@@ -157,6 +157,8 @@ export type Rehabilitation =
     | "促されて向かう"
     | "拒否、無関心"
 
+export const REHABILITATION: Readonly<Rehabilitation>[] = ["自らリハビリに向かう、活動を求める", "促されて向かう", "拒否、無関心"]
+
 export type VitalityIndex = {
     communication: Communication,
     wakeUp: WakeUp,
