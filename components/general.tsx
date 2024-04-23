@@ -5,6 +5,7 @@ import { UserContext } from "@/lib/state/user-provider"
 import { ChangeEvent, useContext } from "react";
 import { SelectCell } from "./ui/cell";
 import ADLInfo from "./adl-info";
+import Medicine from "./medicine";
 
 export default function General() {
     const { user, setUser } = useContext(UserContext);
@@ -154,6 +155,8 @@ export default function General() {
                         )
                     })}
                 </div>
+
+                <Medicine />
 
                 <SelectCell
                     id="family"
