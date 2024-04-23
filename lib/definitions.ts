@@ -68,6 +68,8 @@ export type Hospitalizations = {
 // 家族
 export type Family = | "同居" | "独居";
 
+export const FAMILY: Readonly<Family>[] = ["同居", "独居"];
+
 // ADL全般
 export type ADLLevel = "自立" | "一部介助" | "全介助";
 

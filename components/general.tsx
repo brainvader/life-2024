@@ -1,8 +1,9 @@
 'use client'
 
-import { COMPLAINT, Complaint, Hospitalizations } from "@/lib/definitions";
+import { COMPLAINT, Complaint, FAMILY, Family, Hospitalizations } from "@/lib/definitions";
 import { UserContext } from "@/lib/state/user-provider"
 import { ChangeEvent, useContext } from "react";
+import { SelectCell } from "./ui/cell";
 
 export default function General() {
     const { user, setUser } = useContext(UserContext);
@@ -82,6 +83,15 @@ export default function General() {
         })
     }
 
+    const setFamily = (event: ChangeEvent<HTMLSelectElement>) => {
+        const newOption = event.target.value as Family;
+
+        setUser({
+            ...user,
+            family: newOption
+        })
+    }
+
     return (
         <div className="grid grid-cols-4 border-4 border-solid border-black">
             <p className="col-span-4 border-b-2 boder-solid border-black bg-gray-300">
@@ -105,7 +115,7 @@ export default function General() {
             })}
 
             <p className="col-span-4 border-t-2 border-b-2 boder-solid border-black bg-gray-300">緊急入院の状況</p>
-            <div className="col-span-4 h-full">
+            <div className="col-span-4 h-full border-b-2 border-solid border-black">
                 {user.hospitalizations.map((h, i) => {
                     const { start: { yyyy, mm, dd }, complaints
                     }: Hospitalizations = h;
@@ -143,6 +153,17 @@ export default function General() {
                 })}
             </div>
 
+            <SelectCell
+                id="family"
+                labelText="家族の状況（※）"
+                defaultValue={user.family}
+                options={FAMILY}
+                cellSpan={{
+                    labelSpan: { col: 1, row: 1 },
+                    controlSpan: { col: 3, row: 1 }
+                }}
+                onChange={(event) => { }}
+            />
         </div >
     )
 }
