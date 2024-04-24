@@ -86,9 +86,6 @@ export default function DataInput() {
         }
     }
 
-    const download = async (event: MouseEvent<HTMLButtonElement>) => {
-    }
-
     return (
         <div className="flex flex-col justify-center items-center">
             <h1 className="font-bold text-4xl mb-4">データ変換</h1>
@@ -103,11 +100,10 @@ export default function DataInput() {
             <div className="mt-4 text-center">
                 <h2 className="font-bold text-2xl mb-4">出力{name ? `(${name}.csv)` : ""}</h2>
                 <div>
-                    {/* <p className="mb-4">{`${name}.csv`}</p> */}
                     <p className="text-left mb-4">{Object.keys(InputUser).toString()}</p>
                     <p className="text-left mb-4">{csv}</p>
                 </div>
-                <button onMouseDown={(event) => { }}>ダウンロード</button>
+                {csv && <a href={`data:text/plain;charset=utf-8,${csv}`} download={`${name}.csv`}>Save</a>}
             </div>
         </div>
     )
