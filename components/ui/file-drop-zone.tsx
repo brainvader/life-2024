@@ -1,4 +1,4 @@
-import { DragEvent, ReactNode, useState } from "react"
+import { DragEvent } from "react"
 
 interface FileDropZoneProps {
     dragActive: boolean,
