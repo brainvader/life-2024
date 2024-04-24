@@ -1,7 +1,7 @@
 'use client'
 
 import FileDropZone from "@/components/ui/file-drop-zone";
-import { DragEvent, MouseEvent, useState } from "react";
+import { DragEvent, useState } from "react";
 
 const InputUser = {
     "椅子とベッド間の移乗": "",
