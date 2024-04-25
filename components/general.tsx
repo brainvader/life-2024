@@ -122,7 +122,6 @@ export default function General() {
                     {user.hospitalizations.map((h, i) => {
                         const { start: { yyyy, mm, dd }, complaints
                         }: Hospitalizations = h;
-                        console.log(`reason: ${i}, ${h.reason}`)
                         return (
                             <p key={i} className="flex flex-row  flex-nowrap">
                                 <label className="w-2/6 box-border flex gap-2">
