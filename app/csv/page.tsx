@@ -1,32 +1,8 @@
 'use client'
 
 import FileDropZone from "@/components/ui/file-drop-zone";
+import { LIFEOriginalKeys, LIFEOriginalUser } from "@/lib/state/life-original";
 import { DragEvent, useState } from "react";
-
-const InputUser = {
-    "椅子とベッド間の移乗": "",
-    "整容": "",
-    "トイレ動作": "",
-    "入浴": "",
-    "平地歩行": "",
-    "階段昇降": "",
-    "更衣": "",
-    "排便コントロール": "",
-    "排尿コントロール": "",
-    "身長": "",
-    "体重": "",
-    "硬いものを避け柔らかいものばかり食べている": "",
-    "入れ歯を使っている": "",
-    "むせやすい": "",
-    "認知症の診断有無": "",
-    "起床": "",
-    "意思疎通": "",
-    "食事": "",
-    "排せつ": "",
-    "リハビリ・活動": ""
-};
-
-type UserKey = keyof typeof InputUser;
 
 function readLines(input: string) {
     return input.split(/\r?\n|\r|\n/g);
@@ -34,8 +10,9 @@ function readLines(input: string) {
 
 export default function DataInput() {
     const [dragActive, setDragActive] = useState(false);
-    const [csv, setCSV] = useState("");
     const [name, setName] = useState("");
+    const [labels, setLabels] = useState("");
+    const [values, setValues] = useState("");
 
     const dragHandler = (event: DragEvent<HTMLFormElement | HTMLDivElement>) => {
         event.preventDefault();
@@ -55,34 +32,54 @@ export default function DataInput() {
 
         if (event.dataTransfer.files && event.dataTransfer.files[0]) {
             const files = event.dataTransfer.files;
-            console.log(files);
-            const input = await files[0].text();
+
             const [name, extension] = files[0].name.split('.');
             setName(name);
+
+            const input = await files[0].text();
             const lines = readLines(input);
-            const user = { ...InputUser };
+            const pair = { "名前": name, ...LIFEOriginalUser };
 
-            Object.keys(InputUser).map((key, i) => {
-                const key_index = lines.indexOf(key as UserKey);
-
-
-                if (key === "身長" || key == "体重") {
-                    const [value, unit] = lines[key_index + 1].split(" ");
-                    user[key as UserKey] = value;
+            LIFEOriginalKeys.map((key) => {
+                console.log(`##### ${key} ######`)
+                if (key === "同居家族等" || key === "認知症の診断") {
+                    pair[key] = "手入力"
                     return;
                 }
-                const value = lines[key_index + 1];
-                user[key as UserKey] = value;
+
+                if (key === "身長" || key == "体重") {
+                    const key_index = lines.indexOf(key)
+                    const value = lines[key_index + 1]
+                    const [num, unit] = value.split(" ");
+                    pair[key] = num
+                    return;
+                }
+
+                if (key === "リハビリ") {
+                    const key_index = lines.indexOf("リハビリ・活動");
+                    const value = lines[key_index + 1]
+                    pair[key] = value
+                    return;
+                }
+
+                const key_index = lines.indexOf(key)
+                const value = lines[key_index + 1]
+
+                console.log(`${key}: ${value}`);
+
+                pair[key] = value
             })
 
-            console.log(user);
+            const labels = Object.keys(pair).map((key) => {
+                if (key === "リハビリ") {
+                    return "リハビリ・活動";
+                }
+                return key;
+            }).toString();
+            const values = Object.values(pair).toString();
 
-            const keys = Object.keys(user).toString();
-            const values = Object.values(user).toString();
-
-            setCSV(values);
-
-            console.log(keys.concat(values));
+            setLabels(labels)
+            setValues(values);
         }
     }
 
@@ -90,7 +87,7 @@ export default function DataInput() {
         <div className="flex flex-col justify-center items-center">
             <h1 className="font-bold text-4xl mb-4">データ変換</h1>
             <div>
-                <h2 className="text-center font-bold text-2xl mb-4">対象ファイル</h2>
+                <h2 className="text-center font-bold text-2xl mb-4">対象ファイル: {name ? `(${name}.txt)` : ""}</h2>
                 <FileDropZone
                     dragActive={dragActive}
                     dragHandler={(event) => { dragHandler(event) }}
@@ -98,12 +95,12 @@ export default function DataInput() {
             </div>
 
             <div className="mt-4 text-center">
-                <h2 className="font-bold text-2xl mb-4">出力{name ? `(${name}.csv)` : ""}</h2>
+                <h2 className="font-bold text-2xl mb-4">出力: {name ? `(${name}.csv)` : ""}</h2>
                 <div>
-                    <p className="text-left mb-4">{Object.keys(InputUser).toString()}</p>
-                    <p className="text-left mb-4">{csv}</p>
+                    {labels && <p className="text-left mb-4">{labels}</p>}
+                    {values && <p className="text-left mb-4">{values}</p>}
                 </div>
-                {csv && <a href={`data:text/plain;charset=utf-8,${csv}`} download={`${name}.csv`}>Save</a>}
+                {values && <a href={`data:text/csv;charset=utf-8,${labels}\r\n${values}`} download={`${name}.csv`}>Save</a>}
             </div>
         </div>
     )
