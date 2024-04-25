@@ -6,8 +6,6 @@ export default function Medicine() {
     const { user, setUser } = useContext(UserContext)
 
     const setMedicine = (event: ChangeEvent<HTMLInputElement>, i: number) => {
-        console.log(i);
-
         const newValue = event.target.value;
         const preMedicine = user.medicine;
         const newMedicine = preMedicine.map((d, j) => {

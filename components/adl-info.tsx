@@ -31,9 +31,10 @@ export default function ADLInfo() {
 
     return (<>
         <h3 className="col-span-4 row-span-1 border-b-2 border-solid border-black  bg-gray-300 px-2">ADL</h3>
-        {Object.keys(user.adl).map((key) => {
+        {Object.keys(user.adl).map((key, i) => {
             return (
                 <SelectCell
+                    key={i}
                     id={key}
                     labelText={ADLMap[key as keyof ADL]}
                     defaultValue={user.adl.eating}

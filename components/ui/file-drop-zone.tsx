@@ -1,3 +1,5 @@
+'use client'
+
 import { DragEvent } from "react"
 
 interface FileDropZoneProps {
@@ -5,8 +7,6 @@ interface FileDropZoneProps {
     dragHandler: (event: DragEvent<HTMLFormElement | HTMLDivElement>) => void
     dropHandler: (event: DragEvent<HTMLDivElement>) => void
 }
-
-
 
 export default function FileDropZone({ dragActive, dragHandler, dropHandler }: FileDropZoneProps) {
 
