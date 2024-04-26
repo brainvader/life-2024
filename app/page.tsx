@@ -1,107 +1,45 @@
-'use client'
+import UserInfo from '@/components/user-info';
+import styles from '../../styles/editor.module.css'
+import BasicInfo from '@/components/basic-info';
+import OralNutritionInfo from '@/components/oral-nutrition-info';
+import VitalityIndex from '@/components/vitality-index';
+import General from '@/components/general';
+import DementiaInfo from '@/components/dementia-info';
 
-import FileDropZone from "@/components/ui/file-drop-zone";
-import { LIFEOriginalKeys, LIFEOriginalUser } from "@/lib/life-original";
-import { DragEvent, useState } from "react";
+export default function Home() {
+  return (
+    // <div>未完成</div>
+    <main className={styles.index}>
+      <h1>科学的介護推進に関する評価（通所・居住サービス）</h1>
+      <section className={styles.section}>
+        <h2>【利用者情報】</h2>
+        <UserInfo />
+      </section>
 
-function readLines(input: string) {
-    return input.split(/\r?\n|\r|\n/g);
-}
+      <section className={styles.section}>
+        <h2>【基本情報】</h2>
+        <BasicInfo />
+      </section>
 
-export default function DataInput() {
-    const [dragActive, setDragActive] = useState(false);
-    const [name, setName] = useState("");
-    const [labels, setLabels] = useState("");
-    const [values, setValues] = useState("");
+      <section className={styles.section}>
+        <h2>【総論】</h2>
+        <General />
+      </section>
 
-    const dragHandler = (event: DragEvent<HTMLFormElement | HTMLDivElement>) => {
-        event.preventDefault();
-        event.stopPropagation();
+      <section className={styles.section}>
+        <h2>【口腔・栄養】</h2>
+        <OralNutritionInfo />
+      </section>
 
-        if (event.type === "dragenter" || event.type === "dragover") {
-            setDragActive(true);
-        } else if (event.type === "dragleave") {
-            setDragActive(false);
-        }
-    }
+      <section className={styles.section}>
+        <h2>【認知症】</h2>
+        <DementiaInfo />
+      </section>
 
-    const dropHandler = async (event: DragEvent<HTMLDivElement>) => {
-        event.preventDefault();
-        event.stopPropagation();
-        setDragActive(false);
-
-        if (event.dataTransfer.files && event.dataTransfer.files[0]) {
-            const files = event.dataTransfer.files;
-
-            const [name, extension] = files[0].name.split('.');
-            setName(name);
-
-            const input = await files[0].text();
-            const lines = readLines(input);
-            const pair = { "名前": name, ...LIFEOriginalUser };
-
-            LIFEOriginalKeys.map((key) => {
-                console.log(`##### ${key} ######`)
-                if (key === "同居家族等" || key === "認知症の診断") {
-                    pair[key] = "手入力"
-                    return;
-                }
-
-                if (key === "身長" || key == "体重") {
-                    const key_index = lines.indexOf(key)
-                    const value = lines[key_index + 1]
-                    const [num, unit] = value.split(" ");
-                    pair[key] = num
-                    return;
-                }
-
-                if (key === "リハビリ") {
-                    const key_index = lines.indexOf("リハビリ・活動");
-                    const value = lines[key_index + 1]
-                    pair[key] = value
-                    return;
-                }
-
-                const key_index = lines.indexOf(key)
-                const value = lines[key_index + 1]
-
-                console.log(`${key}: ${value}`);
-
-                pair[key] = value
-            })
-
-            const labels = Object.keys(pair).map((key) => {
-                if (key === "リハビリ") {
-                    return "リハビリ・活動";
-                }
-                return key;
-            }).toString();
-            const values = Object.values(pair).toString();
-
-            setLabels(labels)
-            setValues(values);
-        }
-    }
-
-    return (
-        <div className="flex flex-col justify-center items-center">
-            <h1 className="font-bold text-4xl mb-4">データ変換</h1>
-            <div>
-                <h2 className="text-center font-bold text-2xl mb-4">対象ファイル: {name ? `(${name}.txt)` : ""}</h2>
-                <FileDropZone
-                    dragActive={dragActive}
-                    dragHandler={(event) => { dragHandler(event) }}
-                    dropHandler={(event) => { dropHandler(event) }} />
-            </div>
-
-            <div className="mt-4 text-center">
-                <h2 className="font-bold text-2xl mb-4">出力: {name ? `(${name}.csv)` : ""}</h2>
-                <div>
-                    {labels && <p className="text-left mb-4">{labels}</p>}
-                    {values && <p className="text-left mb-4">{values}</p>}
-                </div>
-                {values && <a href={`data:text/csv;charset=utf-8,${labels}\r\n${values}`} download={`${name}.csv`}>Save</a>}
-            </div>
-        </div>
-    )
+      <section className={styles.section}>
+        <h2>【Vitality Index】</h2>
+        <VitalityIndex />
+      </section>
+    </main>
+  );
 }
