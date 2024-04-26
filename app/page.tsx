@@ -1,7 +1,7 @@
 'use client'
 
 import FileDropZone from "@/components/ui/file-drop-zone";
-import { LIFEOriginalKeys, LIFEOriginalUser } from "@/lib/state/life-original";
+import { LIFEOriginalKeys, LIFEOriginalUser } from "@/lib/life-original";
 import { DragEvent, useState } from "react";
 
 function readLines(input: string) {
