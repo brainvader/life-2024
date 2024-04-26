@@ -28,6 +28,7 @@ export const LIFEOriginalKeys: Readonly<LIFEOriginalKey[]> = [
     "障害高齢者の日常生活自立度",
     "認知症高齢者の日常生活自立度",
     "同居家族等",
+    "食事",
     "椅子とベッド間の移乗",
     "整容",
     "トイレ動作",
