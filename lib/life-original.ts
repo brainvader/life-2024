@@ -23,9 +23,6 @@ export type LIFEOriginalKey =
     | ADL
     | "身長"
     | "体重"
-    | "硬いものを避け柔らかいものばかり食べている"
-    | "入れ歯を使っている"
-    | "むせやすい"
     | "認知症の診断"
     | VitalityIndex
 
@@ -45,9 +42,6 @@ export const LIFEOriginalKeys: Readonly<LIFEOriginalKey[]> = [
     "排尿コントロール",
     "身長",
     "体重",
-    "硬いものを避け柔らかいものばかり食べている",
-    "入れ歯を使っている",
-    "むせやすい",
     "認知症の診断",
     "起床",
     "意思疎通",
@@ -71,9 +65,6 @@ export const LIFEOriginalUser: Record<LIFEOriginalKey, string> = {
     "排尿コントロール": "",
     "身長": "",
     "体重": "",
-    "硬いものを避け柔らかいものばかり食べている": "",
-    "入れ歯を使っている": "",
-    "むせやすい": "",
     "認知症の診断": "",
     "起床": "",
     "意思疎通": "",

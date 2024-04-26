@@ -2,7 +2,6 @@
 
 import { createContext, useState, Dispatch, SetStateAction } from "react";
 import { dummyUser } from "./user";
-import { User } from "../definitions";
 import { LIFEFormat } from "../life";
 
 type UserContext = {

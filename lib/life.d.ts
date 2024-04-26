@@ -111,7 +111,7 @@ export type LIFEFormat = {
         "薬剤名": string
     }[],
     // 家族
-    "家族の状況": "同居" | "独居",
+    "家族の状況": "同居" | "独居" | null,
 
     // ADL
     "食事": ADLLevel,
