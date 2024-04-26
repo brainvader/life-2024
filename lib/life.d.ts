@@ -103,7 +103,7 @@ export type LIFEFormat = {
     //【総論】
     "診断名": string[],
     "緊急入院時の状況": {
-        "入院日": "",
+        "入院日": Date,
         "受療時の主訴": "発熱" | "転倒" | "その他",
         "その他": string,
     }[],
@@ -142,7 +142,7 @@ export type LIFEFormat = {
     "認知症の診断": {
         "診断名": Dementia,
         "その他": string,
-    }
+    } | null,
     //【Vitality Index】
     "意思疎通": Communication,
     "起床": WakeUp,

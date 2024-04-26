@@ -1,71 +1,73 @@
-import { User } from "../definitions";
+import { LIFEFormat } from "../life";
 
-export const dummyUser: User = {
-    name: "氏　名前",
-    kana: "うじ　なまえ",
-    birthday: {
-        yyyy: "2024", mm: "05", dd: "10"
+export const dummyUser: LIFEFormat = {
+    // 【利用者情報】
+    "名前": "",
+    "生年月日": { yyyy: "2024", mm: "04", dd: "22" },
+    "保険者番号": null,
+    "被保険者番号": null,
+    "性別": "男",
+
+    // 【基本情報】
+    "要介護度": "要介護1",
+    "障害高齢者の日常生活自立度": "自立",
+    "認知症高齢者の日常生活自立度": "自立",
+    "評価日": { yyyy: "2024", mm: "04", dd: "22" },
+    "評価時点": "サービス利用中",
+    //【総論】
+    "診断名": ["", "", ""],
+    "緊急入院時の状況": [{
+        "入院日": { yyyy: "2024", mm: "04", dd: "22" },
+        "受療時の主訴": "その他",
+        "その他": "",
     },
-    sex: "男",
-    insurerNumber: "",
-    insuredNumber: "",
-    careLevel: "要介護1",
-    independenceLevelWithDisabilities: "自立",
-    independenceLevelWithDementia: "自立",
-    evaluationDay: {
-        yyyy: "2024", mm: "04", dd: "12"
+    {
+        "入院日": { yyyy: "2024", mm: "04", dd: "22" },
+        "受療時の主訴": "その他",
+        "その他": "",
     },
-    evaluationPoint: "サービス利用中",
-    diagnosis: ["", "", ""],
-    hospitalizations: [
-        {
-            start: { yyyy: "2024", mm: "10", dd: "11" },
-            complaints: "その他",
-            reason: ""
-        },
-        {
-            start: { yyyy: "2024", mm: "05", dd: "30" },
-            complaints: "発熱",
-            reason: ""
-        },
-        {
-            start: { yyyy: "2020", mm: "03", dd: "05" },
-            complaints: "転倒",
-            reason: ""
-        }
-    ],
-    medicine: ["", "", ""],
-    family: "同居",
-    adl: {
-        eating: "自立",
-        transfer: "座れるが移れない",
-        grooming: "自立",
-        toileting: "自立",
-        bathing: "自立",
-        walking: "自立",
-        stairs: "自立",
-        dressing: "自立",
-        bladderControl: "自立",
-        bowelsControl: "自立",
+    {
+        "入院日": { yyyy: "2024", mm: "04", dd: "22" },
+        "受療時の主訴": "その他",
+        "その他": "",
+    }],
+    "服薬情報": [{ "薬剤名": "" }, { "薬剤名": "" }, { "薬剤名": "" }],
+    // 家族
+    "家族の状況": "同居",
+
+    // ADL
+    "食事": "自立",
+    "椅子とベッド間の移乗": "自立",
+    "整容": "自立",
+    "トイレ動作": "自立",
+    "入浴": "自立",
+    "平地歩行": "自立",
+    "階段昇降": "自立",
+    "更衣": "自立",
+    "排便コントロール": "自立",
+    "排尿コントロール": "自立",
+    "サービス利用終了理由": {
+        "サービス利用終了日": { yyyy: "2024", mm: "04", dd: "22" },
+        "終了理由": "その他",
+        "その他": "",
     },
-    endService: {
-        date: { yyyy: "2024", mm: "04", dd: "01" },
-        reason: "その他",
+
+    //【口腔・栄養】
+    "身長": "195.2",
+    "体重": "95",
+    "義歯の使用": "なし",
+    "むせ": "なし",
+    "歯の汚れ": "なし",
+    "歯肉の腫れ出血": "なし",
+
+    // 【認知症】
+    "認知症の診断": {
+        "診断名": "その他",
+        "その他": "",
     },
-    height: 180.5,
-    weight: 75.5,
-    denture: "あり",
-    choke: "なし",
-    stain: "あり",
-    gum: "あり",
-    dementia: {
-        type: "その他",
-        cause: ""
-    },
-    vitalityIndex: {
-        communication: "自分から挨拶する、話しかける",
-        wakeUp: "いつも定時に起床している",
-        discharge: "いつも自ら便意尿意を伝える、あるいは自分で排尿、排便を行う",
-        rehabilitation: "自らリハビリに向かう、活動を求める",
-    }
+    //【Vitality Index】
+    "意思疎通": "自分から挨拶する、話しかける",
+    "起床": "いつも定時に起床している",
+    "排泄": "いつも自ら便意尿意を伝える、あるいは自分で排尿、排便を行う",
+    "リハビリ": "自らリハビリに向かう、活動を求める",
 }
