@@ -7,7 +7,7 @@ import VitalityIndex from '@/components/vitality-index';
 import General from '@/components/general';
 import DementiaInfo from '@/components/dementia-info';
 import FileDropZone from '@/components/ui/file-drop-zone';
-import { DragEvent, useContext, useRef, useState } from 'react';
+import { DragEvent, KeyboardEvent, MouseEvent, useContext, useRef, useState } from 'react';
 import { readLines } from '@/lib/utils';
 import { UserContext } from '@/lib/state/user-provider';
 import { LIFEOriginalKeys, LIFEOriginalFormat } from '@/lib/life-original';
@@ -109,6 +109,20 @@ export default function Home() {
     }
   }
 
+  const clickHandler = (event: MouseEvent<HTMLButtonElement>) => {
+    console.log("donwload");
+    const text = `
+    ダウンロードしますか？
+    ${user["名前"]}.json
+    ${JSON.stringify(user, null, 2)}
+    `
+    if (window) {
+      if (window.confirm(text) == true) {
+        downloadJSON(`${user["名前"]}.json`)
+      }
+    }
+  }
+
   const downloadJSON = (filename: string): void => {
     const link = anchorRef.current
     if (!link) return
@@ -128,8 +142,17 @@ export default function Home() {
         onDragEnter={dragHandler}
         onDragLeave={dragHandler}
         onDragOver={dragHandler}
-        onDrop={dropHandler}>
+        onDrop={dropHandler}
+      >
         <h1>科学的介護推進に関する評価（通所・居住サービス）</h1>
+        <div className="w-full flex justify-center">
+          <button
+            className="block w-[300px] text-lg bg-slate-400 rounded-full my-4"
+            onClick={(event) => { clickHandler(event) }}>
+            ダウンロード(JSON)
+          </button>
+        </div>
+
 
         {/* <section className="box-border mb-4">
           <h2>【坂道】</h2>
