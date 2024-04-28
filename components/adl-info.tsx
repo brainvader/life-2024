@@ -106,102 +106,103 @@ export default function ADLInfo() {
 
     return (
         <>
-            <h3 className="col-span-4 border-b-2 border-solid border-black  bg-gray-300 px-2">ADL</h3>
-            <ADLItem
-                user={user}
-                label="食事"
-                levelMap={ADL_LEVEL}
-                onChange={setADL} />
+            <div className="grid grid-cols-4 grid-rows-[11]">
+                <h3 className="col-span-4 row-span-1 box-border border-b-2 boder-solid border-black bg-gray-300">ADL</h3>
+                <ADLItem
+                    user={user}
+                    label="食事"
+                    levelMap={ADL_LEVEL}
+                    onChange={setADL} />
 
-            <SelectCell
-                id="椅子とベッド間の移乗"
-                labelText="椅子とベッド間の移乗"
-                value={`${user["椅子とベッド間の移乗"]} (${TRANSFER_LEVEL[user["椅子とベッド間の移乗"]]})`}
-                options={Object.entries(TRANSFER_LEVEL).map((pair) => {
-                    const [level, point] = pair;
-                    return `${level} (${point})`
-                })}
-                cellSpan={{
-                    labelSpan: { col: 1, row: 1 },
-                    controlSpan: { col: 3, row: 1 }
-                }}
-                onChange={(event) => { setTransferLevel(event) }}
-            />
+                <SelectCell
+                    id="椅子とベッド間の移乗"
+                    labelText="椅子とベッド間の移乗"
+                    value={`${user["椅子とベッド間の移乗"]} (${TRANSFER_LEVEL[user["椅子とベッド間の移乗"]]})`}
+                    options={Object.entries(TRANSFER_LEVEL).map((pair) => {
+                        const [level, point] = pair;
+                        return `${level} (${point})`
+                    })}
+                    cellSpan={{
+                        labelSpan: { col: 1, row: 1 },
+                        controlSpan: { col: 3, row: 1 }
+                    }}
+                    onChange={(event) => { setTransferLevel(event) }}
+                />
 
-            <SelectCell
-                id="整容"
-                labelText="整容"
-                value={`${user["整容"]} (${GROOM_LEVEL[user["整容"]]})`}
-                options={Object.entries(GROOM_LEVEL).map((pair) => {
-                    const [level, point] = pair;
-                    return `${level} (${point})`
-                })}
-                cellSpan={{
-                    labelSpan: { col: 1, row: 1 },
-                    controlSpan: { col: 3, row: 1 }
-                }}
-                onChange={(event) => { setADL(event) }}
-            />
+                <SelectCell
+                    id="整容"
+                    labelText="整容"
+                    value={`${user["整容"]} (${GROOM_LEVEL[user["整容"]]})`}
+                    options={Object.entries(GROOM_LEVEL).map((pair) => {
+                        const [level, point] = pair;
+                        return `${level} (${point})`
+                    })}
+                    cellSpan={{
+                        labelSpan: { col: 1, row: 1 },
+                        controlSpan: { col: 3, row: 1 }
+                    }}
+                    onChange={(event) => { setADL(event) }}
+                />
 
-            <ADLItem
-                user={user}
-                label="トイレ動作"
-                levelMap={ADL_LEVEL}
-                onChange={setADL} />
+                <ADLItem
+                    user={user}
+                    label="トイレ動作"
+                    levelMap={ADL_LEVEL}
+                    onChange={setADL} />
 
-            <SelectCell
-                id="入浴"
-                labelText="入浴"
-                value={`${user["入浴"]} (${BATH_LEVEL[user["入浴"]]})`}
-                options={Object.entries(BATH_LEVEL).map((pair) => {
-                    const [level, point] = pair;
-                    return `${level} (${point})`
-                })}
-                cellSpan={{
-                    labelSpan: { col: 1, row: 1 },
-                    controlSpan: { col: 3, row: 1 }
-                }}
-                onChange={(event) => { setADL(event) }}
-            />
+                <SelectCell
+                    id="入浴"
+                    labelText="入浴"
+                    value={`${user["入浴"]} (${BATH_LEVEL[user["入浴"]]})`}
+                    options={Object.entries(BATH_LEVEL).map((pair) => {
+                        const [level, point] = pair;
+                        return `${level} (${point})`
+                    })}
+                    cellSpan={{
+                        labelSpan: { col: 1, row: 1 },
+                        controlSpan: { col: 3, row: 1 }
+                    }}
+                    onChange={(event) => { setADL(event) }}
+                />
 
-            <SelectCell
-                id="平地歩行"
-                labelText="平地歩行"
-                value={`${user["平地歩行"]} (${WALK_LEVEL[user["平地歩行"]]})`}
-                options={Object.entries(WALK_LEVEL).map((pair) => {
-                    const [level, point] = pair;
-                    return `${level} (${point})`
-                })}
-                cellSpan={{
-                    labelSpan: { col: 1, row: 1 },
-                    controlSpan: { col: 3, row: 1 }
-                }}
-                onChange={(event) => { setWalkLevel(event) }}
-            />
+                <SelectCell
+                    id="平地歩行"
+                    labelText="平地歩行"
+                    value={`${user["平地歩行"]} (${WALK_LEVEL[user["平地歩行"]]})`}
+                    options={Object.entries(WALK_LEVEL).map((pair) => {
+                        const [level, point] = pair;
+                        return `${level} (${point})`
+                    })}
+                    cellSpan={{
+                        labelSpan: { col: 1, row: 1 },
+                        controlSpan: { col: 3, row: 1 }
+                    }}
+                    onChange={(event) => { setWalkLevel(event) }}
+                />
 
-            <ADLItem
-                user={user}
-                label="階段昇降"
-                levelMap={ADL_LEVEL}
-                onChange={setADL} />
+                <ADLItem
+                    user={user}
+                    label="階段昇降"
+                    levelMap={ADL_LEVEL}
+                    onChange={setADL} />
 
-            <ADLItem
-                user={user}
-                label="更衣"
-                levelMap={ADL_LEVEL}
-                onChange={setADL} />
+                <ADLItem
+                    user={user}
+                    label="更衣"
+                    levelMap={ADL_LEVEL}
+                    onChange={setADL} />
 
-            <ADLItem
-                user={user}
-                label="排便コントロール"
-                levelMap={ADL_LEVEL}
-                onChange={setADL} />
+                <ADLItem
+                    user={user}
+                    label="排便コントロール"
+                    levelMap={ADL_LEVEL}
+                    onChange={setADL} />
 
-            <ADLItem
-                user={user}
-                label="排尿コントロール"
-                levelMap={ADL_LEVEL}
-                onChange={setADL} />
-        </>
+                <ADLItem
+                    user={user}
+                    label="排尿コントロール"
+                    levelMap={ADL_LEVEL}
+                    onChange={setADL} />
+            </div></>
     )
 }

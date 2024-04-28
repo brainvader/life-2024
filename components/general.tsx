@@ -2,7 +2,7 @@
 
 import { UserContext } from "@/lib/state/user-provider"
 import { ChangeEvent, useContext } from "react";
-import { SelectCell, TextInputCell } from "./ui/cell";
+import { SelectCell } from "./ui/cell";
 import ADLInfo from "./adl-info";
 import Medicine from "./medicine";
 import { Complaint, EndReason, Family } from "@/lib/life";
@@ -110,13 +110,13 @@ export default function General() {
 
     return (
         <>
-            <div className="grid grid-cols-4 border-4 border-solid border-black">
-                <p className="col-span-4 border-b-2 boder-solid border-black bg-gray-300">
+            <div className="grid grid-cols-4">
+                <p className="w-full col-span-4 row-span-1 border-b-2 boder-solid border-black bg-gray-300">
                     診断名(特定疾病または生活機能低下の直接の原因となっている傷病名については1に記入)
                 </p>
                 {user["診断名"].map((d, i) => {
                     return (
-                        <p key={i} className="col-span-4 flex p-2">
+                        <p key={i} className="col-span-4 row-span-1 flex p-2">
                             <label
                                 className="w-5"
                                 htmlFor={`diagnosis${i + 1}`}>
@@ -131,8 +131,8 @@ export default function General() {
                         </p>)
                 })}
 
-                <p className="col-span-4 border-t-2 border-b-2 boder-solid border-black bg-gray-300">緊急入院の状況</p>
-                <div className="col-span-4 h-full border-b-2 border-solid border-black">
+                <p className="col-span-4 row-span-1 border-t-2 border-b-2 boder-solid border-black bg-gray-300">緊急入院の状況</p>
+                <div className="col-span-4 row-span-1 h-full border-b-2 border-solid border-black">
                     {user["緊急入院時の状況"].map((h, i) => {
                         const { yyyy, mm, dd } = h["入院日"];
                         const complaint = h["受療時の主訴"];
@@ -168,9 +168,11 @@ export default function General() {
                         )
                     })}
                 </div>
+            </div>
 
-                <Medicine />
+            <Medicine />
 
+            <div className="grid grid-cols-4 grid-rows-1">
                 <SelectCell
                     id="family"
                     labelText="家族の状況（※）"
@@ -182,9 +184,10 @@ export default function General() {
                     }}
                     onChange={(event) => { setFamily(event) }}
                 />
-                <ADLInfo />
-                <ServiceEnd />
-            </div >
+            </div>
+
+            <ADLInfo />
+            <ServiceEnd />
         </>
     )
 }

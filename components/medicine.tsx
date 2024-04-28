@@ -25,23 +25,25 @@ export default function Medicine() {
     }
     return (
         <>
-            <h3 className="col-span-4 border-b-2 border-solid border-black  bg-gray-300 px-2">服薬情報（※）</h3>
-            {user["服薬情報"].map((m, i) => {
-                return (
-                    <TextInputCell
-                        key={i}
-                        type="text"
-                        id={`medicine-${i}`}
-                        labelText={`薬剤名${i}`}
-                        defaultValue={m['薬剤名']}
-                        cellSpan={{
-                            labelSpan: { col: 1, row: 1 },
-                            controlSpan: { col: 3, row: 1 }
-                        }}
-                        onChange={(event) => { setMedicine(event, i) }}
-                    />
-                )
-            })}
+            <div className="grid grid-cols-4 grid-rows-4">
+                <h3 className="col-span-4 row-span-1 border-b-2 border-solid border-black  bg-gray-300 px-2">服薬情報（※）</h3>
+                {user["服薬情報"].map((m, i) => {
+                    return (
+                        <TextInputCell
+                            key={i}
+                            type="text"
+                            id={`medicine-${i}`}
+                            labelText={`薬剤名${i}`}
+                            defaultValue={m['薬剤名']}
+                            cellSpan={{
+                                labelSpan: { col: 1, row: 1 },
+                                controlSpan: { col: 3, row: 1 }
+                            }}
+                            onChange={(event) => { setMedicine(event, i) }}
+                        />
+                    )
+                })}
+            </div>
         </>
     )
 }

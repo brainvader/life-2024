@@ -61,7 +61,7 @@ export default function BasicInfo() {
     }
 
     return (
-        <div className="grid grid-cols-4 border-4 border-solid border-black box-border">
+        <div className="grid grid-cols-4 grid-rows-5 border-4 border-solid border-black box-border">
             <SelectCell
                 id="care-level"
                 labelText="要介護度"

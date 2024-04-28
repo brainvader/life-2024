@@ -7,19 +7,18 @@ import VitalityIndex from '@/components/vitality-index';
 import General from '@/components/general';
 import DementiaInfo from '@/components/dementia-info';
 import FileDropZone from '@/components/ui/file-drop-zone';
-import { DragEvent, KeyboardEvent, MouseEvent, useContext, useRef, useState } from 'react';
+import { DragEvent, MouseEvent, useContext, useRef, useState } from 'react';
 import { readLines } from '@/lib/utils';
 import { UserContext } from '@/lib/state/user-provider';
 import { LIFEOriginalKeys, LIFEOriginalFormat } from '@/lib/life-original';
 import { dummyUser } from '@/lib/state/user';
 import { ADLLevel, Communication, Discharge, IndependenceLevelDementia, IndependenceLevelDisabilities, LIFEFormat, Rehabilitation, TransferLevel, WakeUp, WalkLevel } from '@/lib/life';
+import { CellLabel } from '@/components/ui/cell';
 
 function readOriginalData(lines: string[]) {
   const lifeOriginalData = { ...LIFEOriginalFormat };
 
   LIFEOriginalKeys.map((key) => {
-    console.log(`##### ${key} ######`)
-
     if (key === "同居家族等" || key === "認知症の診断") {
       lifeOriginalData[key] = "";
       return;
@@ -93,39 +92,74 @@ export default function Home() {
     event.preventDefault();
     event.stopPropagation();
     setDragActive(false);
+    const userId = new Date().valueOf().toString();
 
     if (event.dataTransfer.files && event.dataTransfer.files[0]) {
       const files = event.dataTransfer.files;
-      const [name, extension] = files[0].name.split('.');
+      const [fileName, extension] = files[0].name.split('.');
+      const name = fileName.indexOf('(') ? fileName.split('(')[0].trim() : fileName;
 
       if (extension === "txt") {
         const input = await files[0].text();
         const lines = readLines(input);
         const originalData = readOriginalData(lines);
         const lifeUser = lifeUserfromOriginal(originalData);
+        lifeUser["id"] = userId;
         lifeUser["名前"] = name;
         setUser({ ...lifeUser });
       }
 
       if (extension === "json") {
+        if (!window) { return; }
         const input = await files[0].text();
-        console.log(input);
         const loadedUser: LIFEFormat = JSON.parse(input);
+        if (!loadedUser["id"]) {
+          window.alert(`
+            idがありません。
+            古い形式のデータです。
+            `);
+          return;
+        }
+
+        if (userId !== loadedUser["id"]) {
+          const text = `現在編集中のデータを破棄して、上書きしますか？`
+          if (!window.confirm(text)) {
+            return;
+          }
+        }
+
+        if (userId === loadedUser["id"]) {
+          const text = `同じデータです。編集中のデータを破棄して、上書きしますか？`;
+          if (!window.confirm(text)) {
+            return;
+          }
+        }
+
         setUser({ ...loadedUser })
       }
     }
   }
 
   const clickHandler = (event: MouseEvent<HTMLButtonElement>) => {
-    console.log("donwload");
+    if (!window) {
+      return;
+    }
+    if (!user["id"] || !user["名前"]) {
+      window.alert("idと名前を入力してください");
+      return;
+    }
+
+    const name = user["名前"];
+    const id = user["id"];
+    const fileName = `${name}_${id}.json`
     const text = `
     ダウンロードしますか？
-    ${user["名前"]}.json
+    ${fileName}
     ${JSON.stringify(user, null, 2)}
     `
     if (window) {
       if (window.confirm(text) == true) {
-        downloadJSON(`${user["名前"]}.json`)
+        downloadJSON(fileName)
       }
     }
   }
@@ -134,7 +168,7 @@ export default function Home() {
     const link = anchorRef.current
     if (!link) return
 
-    const blob = new Blob([JSON.stringify(user)], { type: 'application/json;charset=utf-8;' })
+    const blob = new Blob([JSON.stringify(user, null, 2)], { type: 'application/json;charset=utf-8;' })
     const url = URL.createObjectURL(blob)
     link.setAttribute('href', url)
     link.setAttribute('download', filename)
@@ -160,18 +194,16 @@ export default function Home() {
           </button>
         </div>
 
-
         {/* <section className="box-border mb-4">
           <h2>【坂道】</h2>
           <div className='grid grid-cols-4'>
             <div className={`box-border block w-full col-span-1 row-span-1 border-r-2 border-b-2 border-solid border-black pl-1`}>
               <CellLabel id="saka" labelText={"坂道"} />
             </div>
-            <div className={`w-full col-span-2 row-span-1 border-r-2 border-b-2 border-solid border-black`}>
+            <div className={`w-full col-span-3 row-span-1 border-r-2 border-b-2 border-solid border-black`}>
               <select
                 className="block w-full text-center bg-white appearance-none"
                 id="saka"
-                defaultValue={""}
                 value={"日向坂"}
                 onChange={(event) => { }}>
                 {["日向坂46", "乃木坂46", "櫻坂46"].map((option, i) => {
@@ -183,7 +215,7 @@ export default function Home() {
         </section> */}
 
         <section className="box-border mb-4">
-          <h2>【利用者情報】</h2>
+          <h2>{`【利用者情報】${user['id']}`}</h2>
           <UserInfo />
         </section>
 
@@ -194,7 +226,9 @@ export default function Home() {
 
         <section className="box-border mb-4">
           <h2>【総論】</h2>
-          <General />
+          <div className="outline outline-4 border-black">
+            <General />
+          </div>
         </section>
 
         <section className="box-border mb-4">

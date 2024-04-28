@@ -61,37 +61,39 @@ export default function ServiceEnd() {
 
     return (
         <>
-            <h3 className="col-span-4 border-b-2 border-solid border-black  bg-gray-300 px-2">{LIFEKey}</h3>
-            <TextInputCell
-                id="終了理由"
-                type="date"
-                labelText="終了日"
-                defaultValue={`${yyyy}-${mm}-${dd}`}
-                cellSpan={{
-                    labelSpan: { col: 1, row: 1 },
-                    controlSpan: { col: 3, row: 1 }
-                }}
-                onChange={(event) => { setData(event) }}
-            />
-
-            <SelectCell
-                id="終了理由"
-                labelText="理由"
-                value={user[LIFEKey]["終了理由"]}
-                options={[...END_REASON]}
-                cellSpan={{
-                    labelSpan: { col: 1, row: 1 },
-                    controlSpan: { col: 2, row: 1 }
-                }}
-                onChange={(event) => { setReason(event) }}
-            />
-            <div className="col-span-1">
-                <input className="w-full text-center"
-                    defaultValue={user[LIFEKey]["その他"]}
-                    placeholder="理由"
-                    onChange={(event) => { setReasonExtra(event) }}
-                    disabled={user[LIFEKey]["終了理由"] === "その他" ? false : true}
+            <div className="grid grid-cols-4 grid-rows-3">
+                <h3 className="col-span-4 row-span-1 border-b-2 border-solid border-black  bg-gray-300 px-2">{LIFEKey}</h3>
+                <TextInputCell
+                    id="終了理由"
+                    type="date"
+                    labelText="終了日"
+                    defaultValue={`${yyyy}-${mm}-${dd}`}
+                    cellSpan={{
+                        labelSpan: { col: 1, row: 1 },
+                        controlSpan: { col: 3, row: 1 }
+                    }}
+                    onChange={(event) => { setData(event) }}
                 />
+
+                <SelectCell
+                    id="終了理由"
+                    labelText="理由"
+                    value={user[LIFEKey]["終了理由"]}
+                    options={[...END_REASON]}
+                    cellSpan={{
+                        labelSpan: { col: 1, row: 1 },
+                        controlSpan: { col: 2, row: 1 }
+                    }}
+                    onChange={(event) => { setReason(event) }}
+                />
+                <div className="col-span-1">
+                    <input className="w-full text-center"
+                        defaultValue={user[LIFEKey]["その他"]}
+                        placeholder="理由"
+                        onChange={(event) => { setReasonExtra(event) }}
+                        disabled={user[LIFEKey]["終了理由"] === "その他" ? false : true}
+                    />
+                </div>
             </div>
         </>
     )
