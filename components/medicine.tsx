@@ -1,3 +1,5 @@
+'use client'
+
 import { UserContext } from "@/lib/state/user-provider"
 import { ChangeEvent, useContext } from "react"
 import { TextInputCell } from "./ui/cell"
