@@ -24,8 +24,6 @@ export default function ServiceEnd() {
     const setData = (event: ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value;
         const [yyyy, mm, dd] = value.split("-");
-
-        console.log(`${yyyy}/${mm}/${dd}`)
     }
 
     const setReason = (event: ChangeEvent<HTMLSelectElement>) => {

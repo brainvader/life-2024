@@ -42,7 +42,6 @@ export default function General() {
 
     function onHospitalizationsDate(event: ChangeEvent<HTMLInputElement>, i: number) {
         const newDate = event.target.value.split('-');
-        console.log(newDate);
         const preHospitalizations = user["緊急入院時の状況"];
         const newHospitalizations = preHospitalizations.map((h, j) => {
             if (j === i) {
@@ -82,8 +81,6 @@ export default function General() {
 
     function setComplainReason(event: ChangeEvent<HTMLInputElement>, i: number) {
         const newReason = event.target.value;
-
-        console.log(newReason);
 
         const preHospitalizations = user["緊急入院時の状況"];
         const newHospitalizations = preHospitalizations.map((h, j) => {
