@@ -69,8 +69,8 @@ export default function BasicInfo() {
                 options={[...CARE_LEVELS]}
                 cellSpan={
                     {
-                        labelSpan: { col: 2, row: 1 },
-                        controlSpan: { col: 2, row: 1 }
+                        labelSpan: { col: 1, row: 1 },
+                        controlSpan: { col: 3, row: 1 }
                     }}
                 onChange={(event) => { selectCareLevel(event) }} />
             <SelectCell
@@ -80,8 +80,8 @@ export default function BasicInfo() {
                 options={[...INDEPENDENCE_LEVEL_DISABILITIES]}
                 cellSpan={
                     {
-                        labelSpan: { col: 2, row: 1 },
-                        controlSpan: { col: 2, row: 1 }
+                        labelSpan: { col: 1, row: 1 },
+                        controlSpan: { col: 3, row: 1 }
                     }}
                 onChange={(event) => { selectdisabilitiesLevel(event) }} />
             <SelectCell
@@ -91,8 +91,8 @@ export default function BasicInfo() {
                 options={[...INDEPENDENCE_LEVEL_DEMENTIA]}
                 cellSpan={
                     {
-                        labelSpan: { col: 2, row: 1 },
-                        controlSpan: { col: 2, row: 1 }
+                        labelSpan: { col: 1, row: 1 },
+                        controlSpan: { col: 3, row: 1 }
                     }}
                 onChange={(event) => { selectDementiaLevel(event) }} />
             <TextInputCell
@@ -102,8 +102,8 @@ export default function BasicInfo() {
                 defaultValue={`${user["評価日"].yyyy}-${user["評価日"].mm}-${user["評価日"].dd}`}
                 cellSpan={
                     {
-                        labelSpan: { col: 2, row: 1 },
-                        controlSpan: { col: 2, row: 1 }
+                        labelSpan: { col: 1, row: 1 },
+                        controlSpan: { col: 3, row: 1 }
                     }}
                 onChange={(event) => { selectEvaluationDay(event) }}
             />
@@ -114,8 +114,8 @@ export default function BasicInfo() {
                 options={[...EVALUATION_POINT]}
                 cellSpan={
                     {
-                        labelSpan: { col: 2, row: 1 },
-                        controlSpan: { col: 2, row: 1 }
+                        labelSpan: { col: 1, row: 1 },
+                        controlSpan: { col: 3, row: 1 }
                     }}
                 onChange={(event) => { selectEvaluationPoint(event) }} />
         </div >

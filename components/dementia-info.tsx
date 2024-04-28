@@ -47,7 +47,7 @@ export default function DementiaInfo() {
                 }}
                 onChange={(event) => { selectDementia(event) }}
             />
-            <div className="col-span">
+            <div className="col-span-1">
                 <input className="w-full text-center"
                     defaultValue={user["認知症の診断"]["その他"]}
                     placeholder="病名"
