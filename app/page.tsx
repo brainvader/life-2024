@@ -148,11 +148,8 @@ export default function Home() {
 
   return (
     <FileDropZone
-      // dragActive={dragActive}
       dragHandler={(event) => { dragHandler(event) }}
-    // dropHandler={(event) => { dropHandler(event) }}
     >
-
       <main className="w-[90%] my-0 mx-auto"
         onDragEnter={dragHandler}
         onDragLeave={dragHandler}
@@ -163,10 +160,10 @@ export default function Home() {
         {/* <section className="box-border mb-4">
           <h2>【坂道】</h2>
           <div className='grid grid-cols-4'>
-            <div className={`box-border block w-full col-span-2 row-span-1 border-r-2 border-b-2 border-solid border-black pl-1`}>
+            <div className={`box-border block w-full col-span-1 row-span-1 border-r-2 border-b-2 border-solid border-black pl-1`}>
               <CellLabel id="saka" labelText={"坂道"} />
             </div>
-            <div className={`w-full col-span-2 row-span-1 border-r-2 border-b-2 border-solid border-black`}>
+            <div className={`w-full col-span-3 row-span-1 border-r-2 border-b-2 border-solid border-black`}>
               <select
                 className="block w-full text-center bg-white appearance-none"
                 id="saka"
@@ -194,6 +191,21 @@ export default function Home() {
         <section className="box-border mb-4">
           <h2>【総論】</h2>
           <General />
+        </section>
+
+        <section className="box-border mb-4">
+          <h2>【口腔・栄養】</h2>
+          <OralNutritionInfo />
+        </section>
+
+        <section className="box-border mb-4">
+          <h2>【認知症】</h2>
+          <DementiaInfo />
+        </section>
+
+        <section className="box-border mb-4">
+          <h2>【Vitality Index】</h2>
+          <VitalityIndex />
         </section>
       </main>
     </FileDropZone>
