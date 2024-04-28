@@ -163,7 +163,7 @@ export default function Home() {
             <div className={`box-border block w-full col-span-1 row-span-1 border-r-2 border-b-2 border-solid border-black pl-1`}>
               <CellLabel id="saka" labelText={"坂道"} />
             </div>
-            <div className={`w-full col-span-3 row-span-1 border-r-2 border-b-2 border-solid border-black`}>
+            <div className={`w-full col-span-2 row-span-1 border-r-2 border-b-2 border-solid border-black`}>
               <select
                 className="block w-full text-center bg-white appearance-none"
                 id="saka"
