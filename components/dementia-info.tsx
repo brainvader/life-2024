@@ -35,7 +35,7 @@ export default function DementiaInfo() {
     }
 
     return (
-        <div className="grid grid-cols-4 border-4 border-solid border-black box-border">
+        <div className="grid grid-cols-4 grid-rows-1 box-border">
             <SelectCell
                 id='dementia'
                 labelText='認知症'
@@ -47,7 +47,7 @@ export default function DementiaInfo() {
                 }}
                 onChange={(event) => { selectDementia(event) }}
             />
-            <div className="col-span-1">
+            <div className="col-span-1 row-span-1">
                 <input className="w-full text-center"
                     defaultValue={user["認知症の診断"]["その他"]}
                     placeholder="病名"

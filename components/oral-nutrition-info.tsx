@@ -66,7 +66,7 @@ export default function OralNutritionInfo() {
     }
 
     return (
-        <div className="grid grid-cols-4 grid-rows-3 border-4 border-solid border-black box-border">
+        <div className="grid grid-cols-4 grid-rows-3 box-border">
             <TextInputCell
                 type='text'
                 id='height'

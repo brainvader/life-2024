@@ -72,7 +72,7 @@ export default function UserInfo() {
     }
 
     return (
-        <div className="grid grid-cols-4 border-4 border-solid border-black box-border">
+        <div className="grid grid-cols-4 grid-row-3 box-border">
             {/* first row */}
             <TextInputCell
                 type="text"

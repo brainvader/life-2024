@@ -7,57 +7,18 @@ import VitalityIndex from '@/components/vitality-index';
 import General from '@/components/general';
 import DementiaInfo from '@/components/dementia-info';
 import FileDropZone from '@/components/ui/file-drop-zone';
-import { DragEvent, useContext, useState } from 'react';
+import { DragEvent, MouseEvent, useContext, useRef, useState } from 'react';
 import { readLines } from '@/lib/utils';
 import { UserContext } from '@/lib/state/user-provider';
 import { LIFEOriginalKeys, LIFEOriginalFormat } from '@/lib/life-original';
 import { dummyUser } from '@/lib/state/user';
-import { ADLLevel, Communication, Discharge, IndependenceLevelDementia, IndependenceLevelDisabilities, Rehabilitation, TransferLevel, WakeUp, WalkLevel } from '@/lib/life';
-import { CellLabel, SelectCell, TextInputCell } from '@/components/ui/cell';
-
-// function LIFEForm() {
-//   return (
-//     <main className={styles.index}>
-//       <h1>科学的介護推進に関する評価（通所・居住サービス）</h1>
-//       <section className={styles.section}>
-//         <h2>【利用者情報】</h2>
-//         <UserInfo />
-//       </section>
-
-//       <section className={styles.section}>
-//         <h2>【基本情報】</h2>
-//         <BasicInfo />
-//       </section>
-
-//       <section className={styles.section}>
-//         <h2>【総論】</h2>
-//         <General />
-//       </section>
-
-//       <section className={styles.section}>
-//         <h2>【口腔・栄養】</h2>
-//         <OralNutritionInfo />
-//       </section>
-
-//       <section className={styles.section}>
-//         <h2>【認知症】</h2>
-//         <DementiaInfo />
-//       </section>
-
-//       <section className={styles.section}>
-//         <h2>【Vitality Index】</h2>
-//         <VitalityIndex />
-//       </section>
-//     </main>
-//   );
-// }
+import { ADLLevel, Communication, Discharge, IndependenceLevelDementia, IndependenceLevelDisabilities, LIFEFormat, Rehabilitation, TransferLevel, WakeUp, WalkLevel } from '@/lib/life';
+import { CellLabel } from '@/components/ui/cell';
 
 function readOriginalData(lines: string[]) {
   const lifeOriginalData = { ...LIFEOriginalFormat };
 
   LIFEOriginalKeys.map((key) => {
-    console.log(`##### ${key} ######`)
-
     if (key === "同居家族等" || key === "認知症の診断") {
       lifeOriginalData[key] = "";
       return;
@@ -113,7 +74,8 @@ function lifeUserfromOriginal(original: typeof LIFEOriginalFormat) {
 export default function Home() {
   const { user, setUser } = useContext(UserContext);
   const [dragActive, setDragActive] = useState(false);
-  const [original, setOriginal] = useState<typeof LIFEOriginalFormat>();
+
+  const anchorRef = useRef<HTMLAnchorElement>(null)
 
   const dragHandler = (event: DragEvent<HTMLFormElement | HTMLDivElement>) => {
     event.preventDefault();
@@ -130,20 +92,87 @@ export default function Home() {
     event.preventDefault();
     event.stopPropagation();
     setDragActive(false);
+    const userId = new Date().valueOf().toString();
 
     if (event.dataTransfer.files && event.dataTransfer.files[0]) {
       const files = event.dataTransfer.files;
-      const [name, extension] = files[0].name.split('.');
+      const [fileName, extension] = files[0].name.split('.');
+      const name = fileName.indexOf('(') ? fileName.split('(')[0].trim() : fileName;
 
       if (extension === "txt") {
         const input = await files[0].text();
         const lines = readLines(input);
         const originalData = readOriginalData(lines);
         const lifeUser = lifeUserfromOriginal(originalData);
+        lifeUser["id"] = userId;
         lifeUser["名前"] = name;
         setUser({ ...lifeUser });
       }
+
+      if (extension === "json") {
+        if (!window) { return; }
+        const input = await files[0].text();
+        const loadedUser: LIFEFormat = JSON.parse(input);
+        if (!loadedUser["id"]) {
+          window.alert(`
+            idがありません。
+            古い形式のデータです。
+            `);
+          return;
+        }
+
+        if (userId !== loadedUser["id"]) {
+          const text = `現在編集中のデータを破棄して、上書きしますか？`
+          if (!window.confirm(text)) {
+            return;
+          }
+        }
+
+        if (userId === loadedUser["id"]) {
+          const text = `同じデータです。編集中のデータを破棄して、上書きしますか？`;
+          if (!window.confirm(text)) {
+            return;
+          }
+        }
+
+        setUser({ ...loadedUser })
+      }
     }
+  }
+
+  const clickHandler = (event: MouseEvent<HTMLButtonElement>) => {
+    if (!window) {
+      return;
+    }
+    if (!user["id"] || !user["名前"]) {
+      window.alert("idと名前を入力してください");
+      return;
+    }
+
+    const name = user["名前"];
+    const id = user["id"];
+    const fileName = `${name}_${id}.json`
+    const text = `
+    ダウンロードしますか？
+    ${fileName}
+    ${JSON.stringify(user, null, 2)}
+    `
+    if (window) {
+      if (window.confirm(text) == true) {
+        downloadJSON(fileName)
+      }
+    }
+  }
+
+  const downloadJSON = (filename: string): void => {
+    const link = anchorRef.current
+    if (!link) return
+
+    const blob = new Blob([JSON.stringify(user, null, 2)], { type: 'application/json;charset=utf-8;' })
+    const url = URL.createObjectURL(blob)
+    link.setAttribute('href', url)
+    link.setAttribute('download', filename)
+    link.click()
   }
 
   return (
@@ -154,8 +183,16 @@ export default function Home() {
         onDragEnter={dragHandler}
         onDragLeave={dragHandler}
         onDragOver={dragHandler}
-        onDrop={dropHandler}>
+        onDrop={dropHandler}
+      >
         <h1>科学的介護推進に関する評価（通所・居住サービス）</h1>
+        <div className="w-full flex justify-center">
+          <button
+            className="block w-[300px] text-lg bg-slate-400 rounded-full my-4"
+            onClick={(event) => { clickHandler(event) }}>
+            ダウンロード(JSON)
+          </button>
+        </div>
 
         {/* <section className="box-border mb-4">
           <h2>【坂道】</h2>
@@ -163,11 +200,10 @@ export default function Home() {
             <div className={`box-border block w-full col-span-1 row-span-1 border-r-2 border-b-2 border-solid border-black pl-1`}>
               <CellLabel id="saka" labelText={"坂道"} />
             </div>
-            <div className={`w-full col-span-2 row-span-1 border-r-2 border-b-2 border-solid border-black`}>
+            <div className={`w-full col-span-3 row-span-1 border-r-2 border-b-2 border-solid border-black`}>
               <select
                 className="block w-full text-center bg-white appearance-none"
                 id="saka"
-                defaultValue={""}
                 value={"日向坂"}
                 onChange={(event) => { }}>
                 {["日向坂46", "乃木坂46", "櫻坂46"].map((option, i) => {
@@ -179,35 +215,49 @@ export default function Home() {
         </section> */}
 
         <section className="box-border mb-4">
-          <h2>【利用者情報】</h2>
-          <UserInfo />
+          <h2>{`【利用者情報】${user['id']}`}</h2>
+          <div className="border-4 border-solid border-black">
+            <UserInfo />
+          </div>
         </section>
 
         <section className="box-border mb-4">
           <h2>【基本情報】</h2>
-          <BasicInfo />
+          <div className="border-4 border-solid border-black">
+            <BasicInfo />
+          </div>
         </section>
 
         <section className="box-border mb-4">
           <h2>【総論】</h2>
-          <General />
+          <div className="outline outline-4 border-black">
+            <General />
+          </div>
         </section>
 
         <section className="box-border mb-4">
           <h2>【口腔・栄養】</h2>
-          <OralNutritionInfo />
+          <div className="border-4 border-solid border-black">
+            <OralNutritionInfo />
+          </div>
         </section>
 
         <section className="box-border mb-4">
           <h2>【認知症】</h2>
-          <DementiaInfo />
+          <div className="border-4 border-solid border-black">
+            <DementiaInfo />
+          </div>
         </section>
 
         <section className="box-border mb-4">
           <h2>【Vitality Index】</h2>
-          <VitalityIndex />
+          <div className="border-4 border-solid border-black">
+            <VitalityIndex />
+          </div>
         </section>
       </main>
+      <a ref={anchorRef} hidden ></a>
     </FileDropZone>
+
   );
 }

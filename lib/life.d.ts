@@ -99,6 +99,7 @@ export type Rehabilitation =
 
 export type LIFEFormat = {
     // 【利用者情報】
+    "id": string | null;
     "名前": string,
     "ふりがな": string,
     "生年月日": Date,
