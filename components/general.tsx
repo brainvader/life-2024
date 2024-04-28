@@ -166,7 +166,6 @@ export default function General() {
                 <SelectCell
                     id="family"
                     labelText="家族の状況（※）"
-                    defaultValue=""
                     value={user["家族の状況"]}
                     options={[...FAMILY]}
                     cellSpan={{

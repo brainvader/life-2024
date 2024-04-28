@@ -129,7 +129,6 @@ export default function UserInfo() {
             <SelectCell
                 id="sex"
                 labelText="性別"
-                defaultValue={""}
                 value={user["性別"]}
                 options={[...SEX]}
                 cellSpan={

@@ -72,7 +72,6 @@ export default function BasicInfo() {
             <SelectCell
                 id="care-level"
                 labelText="要介護度"
-                defaultValue={""}
                 value={user["要介護度"]}
                 options={[...CARE_LEVELS]}
                 cellSpan={
@@ -84,7 +83,6 @@ export default function BasicInfo() {
             <SelectCell
                 id="independence-level-disabilities"
                 labelText="障害高齢者の日常生活自立度"
-                defaultValue={""}
                 value={user["障害高齢者の日常生活自立度"]}
                 options={[...INDEPENDENCE_LEVEL_DISABILITIES]}
                 cellSpan={
@@ -96,7 +94,6 @@ export default function BasicInfo() {
             <SelectCell
                 id="independence-level-dementia"
                 labelText="認知症高齢者の日常生活自立度"
-                defaultValue={""}
                 value={user["認知症高齢者の日常生活自立度"]}
                 options={[...INDEPENDENCE_LEVEL_DEMENTIA]}
                 cellSpan={
@@ -120,7 +117,6 @@ export default function BasicInfo() {
             <SelectCell
                 id="evaluation-point"
                 labelText="評価時点"
-                defaultValue=""
                 value={user["評価時点"]}
                 options={[...EVALUATION_POINT]}
                 cellSpan={
