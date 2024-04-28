@@ -37,7 +37,7 @@ export default function General() {
             if (j === i) {
                 return {
                     ...h,
-                    start: { yyyy: newDate[0], mm: newDate[1], dd: newDate[2] },
+                    ["入院日"]: { yyyy: newDate[0], mm: newDate[1], dd: newDate[2] },
                 };
             }
             return h;
@@ -57,7 +57,7 @@ export default function General() {
             if (j === i) {
                 return {
                     ...h,
-                    complaints: newComplain as Complaint
+                    ["受療時の主訴"]: newComplain as Complaint
                 };
             }
             return h;
@@ -65,7 +65,7 @@ export default function General() {
 
         setUser({
             ...user,
-            ["緊急入院時の状況"]: newHospitalizations
+            ["緊急入院時の状況"]: [...newHospitalizations]
         })
     }
 
@@ -153,7 +153,7 @@ export default function General() {
                                         })}
                                     </select>
                                     {complaint === "その他" ?
-                                        <input value={reason} placeholder="理由" onChange={(event) => { setComplainReason(event, i) }} />
+                                        < input value={reason} placeholder="理由" onChange={(event) => { setComplainReason(event, i) }} />
                                         : <></>}
                                 </label>
                             </p >
