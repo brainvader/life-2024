@@ -12,7 +12,7 @@ import { readLines } from '@/lib/utils';
 import { UserContext } from '@/lib/state/user-provider';
 import { LIFEOriginalKeys, LIFEOriginalFormat } from '@/lib/life-original';
 import { dummyUser } from '@/lib/state/user';
-import { ADLLevel, Communication, Discharge, IndependenceLevelDementia, IndependenceLevelDisabilities, Rehabilitation, TransferLevel, WakeUp, WalkLevel } from '@/lib/life';
+import { ADLLevel, Communication, Discharge, IndependenceLevelDementia, IndependenceLevelDisabilities, LIFEFormat, Rehabilitation, TransferLevel, WakeUp, WalkLevel } from '@/lib/life';
 
 function readOriginalData(lines: string[]) {
   const lifeOriginalData = { ...LIFEOriginalFormat };
@@ -105,6 +105,13 @@ export default function Home() {
         const lifeUser = lifeUserfromOriginal(originalData);
         lifeUser["名前"] = name;
         setUser({ ...lifeUser });
+      }
+
+      if (extension === "json") {
+        const input = await files[0].text();
+        console.log(input);
+        const loadedUser: LIFEFormat = JSON.parse(input);
+        setUser({ ...loadedUser })
       }
     }
   }
