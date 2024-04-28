@@ -216,12 +216,16 @@ export default function Home() {
 
         <section className="box-border mb-4">
           <h2>{`【利用者情報】${user['id']}`}</h2>
-          <UserInfo />
+          <div className="border-4 border-solid border-black">
+            <UserInfo />
+          </div>
         </section>
 
         <section className="box-border mb-4">
           <h2>【基本情報】</h2>
-          <BasicInfo />
+          <div className="border-4 border-solid border-black">
+            <BasicInfo />
+          </div>
         </section>
 
         <section className="box-border mb-4">
@@ -233,17 +237,23 @@ export default function Home() {
 
         <section className="box-border mb-4">
           <h2>【口腔・栄養】</h2>
-          <OralNutritionInfo />
+          <div className="border-4 border-solid border-black">
+            <OralNutritionInfo />
+          </div>
         </section>
 
         <section className="box-border mb-4">
           <h2>【認知症】</h2>
-          <DementiaInfo />
+          <div className="border-4 border-solid border-black">
+            <DementiaInfo />
+          </div>
         </section>
 
         <section className="box-border mb-4">
           <h2>【Vitality Index】</h2>
-          <VitalityIndex />
+          <div className="border-4 border-solid border-black">
+            <VitalityIndex />
+          </div>
         </section>
       </main>
       <a ref={anchorRef} hidden ></a>

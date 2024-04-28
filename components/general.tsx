@@ -111,7 +111,7 @@ export default function General() {
     return (
         <>
             <div className="grid grid-cols-4">
-                <p className="w-full col-span-4 row-span-1 border-b-2 boder-solid border-black bg-gray-300">
+                <p className="h-full col-span-4 row-span-1 border-b-2 boder-solid border-black bg-gray-300">
                     診断名(特定疾病または生活機能低下の直接の原因となっている傷病名については1に記入)
                 </p>
                 {user["診断名"].map((d, i) => {

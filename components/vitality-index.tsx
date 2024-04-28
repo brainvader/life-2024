@@ -51,7 +51,7 @@ export default function VitalityIndex() {
     }
 
     return (
-        <div className="grid grid-cols-4 grid-rows-4 border-4 border-solid border-black box-border">
+        <div className="grid grid-cols-4 grid-rows-4 box-border">
             <SelectCell
                 id='communiaction'
                 labelText='意思疎通'
