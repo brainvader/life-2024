@@ -169,10 +169,10 @@ export default function General() {
                     value={user["家族の状況"]}
                     options={[...FAMILY]}
                     cellSpan={{
-                        labelSpan: { col: 2, row: 1 },
-                        controlSpan: { col: 2, row: 1 }
+                        labelSpan: { col: 1, row: 1 },
+                        controlSpan: { col: 3, row: 1 }
                     }}
-                    onChange={(event) => { }}
+                    onChange={(event) => { setFamily(event) }}
                 />
                 <ADLInfo />
             </div >
