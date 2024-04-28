@@ -35,8 +35,8 @@ export default function Medicine() {
                         labelText={`薬剤名${i}`}
                         defaultValue={m['薬剤名']}
                         cellSpan={{
-                            labelSpan: { col: 2, row: 1 },
-                            controlSpan: { col: 2, row: 1 }
+                            labelSpan: { col: 1, row: 1 },
+                            controlSpan: { col: 3, row: 1 }
                         }}
                         onChange={(event) => { setMedicine(event, i) }}
                     />
