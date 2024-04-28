@@ -161,7 +161,7 @@ export default function General() {
                     })}
                 </div>
 
-                {/* <Medicine /> */}
+                <Medicine />
 
                 <SelectCell
                     id="family"
