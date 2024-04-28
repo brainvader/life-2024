@@ -7,50 +7,12 @@ import VitalityIndex from '@/components/vitality-index';
 import General from '@/components/general';
 import DementiaInfo from '@/components/dementia-info';
 import FileDropZone from '@/components/ui/file-drop-zone';
-import { DragEvent, useContext, useState } from 'react';
+import { DragEvent, useContext, useRef, useState } from 'react';
 import { readLines } from '@/lib/utils';
 import { UserContext } from '@/lib/state/user-provider';
 import { LIFEOriginalKeys, LIFEOriginalFormat } from '@/lib/life-original';
 import { dummyUser } from '@/lib/state/user';
 import { ADLLevel, Communication, Discharge, IndependenceLevelDementia, IndependenceLevelDisabilities, Rehabilitation, TransferLevel, WakeUp, WalkLevel } from '@/lib/life';
-import { CellLabel, SelectCell, TextInputCell } from '@/components/ui/cell';
-
-// function LIFEForm() {
-//   return (
-//     <main className={styles.index}>
-//       <h1>科学的介護推進に関する評価（通所・居住サービス）</h1>
-//       <section className={styles.section}>
-//         <h2>【利用者情報】</h2>
-//         <UserInfo />
-//       </section>
-
-//       <section className={styles.section}>
-//         <h2>【基本情報】</h2>
-//         <BasicInfo />
-//       </section>
-
-//       <section className={styles.section}>
-//         <h2>【総論】</h2>
-//         <General />
-//       </section>
-
-//       <section className={styles.section}>
-//         <h2>【口腔・栄養】</h2>
-//         <OralNutritionInfo />
-//       </section>
-
-//       <section className={styles.section}>
-//         <h2>【認知症】</h2>
-//         <DementiaInfo />
-//       </section>
-
-//       <section className={styles.section}>
-//         <h2>【Vitality Index】</h2>
-//         <VitalityIndex />
-//       </section>
-//     </main>
-//   );
-// }
 
 function readOriginalData(lines: string[]) {
   const lifeOriginalData = { ...LIFEOriginalFormat };
@@ -113,7 +75,8 @@ function lifeUserfromOriginal(original: typeof LIFEOriginalFormat) {
 export default function Home() {
   const { user, setUser } = useContext(UserContext);
   const [dragActive, setDragActive] = useState(false);
-  const [original, setOriginal] = useState<typeof LIFEOriginalFormat>();
+
+  const anchorRef = useRef<HTMLAnchorElement>(null)
 
   const dragHandler = (event: DragEvent<HTMLFormElement | HTMLDivElement>) => {
     event.preventDefault();
@@ -144,6 +107,17 @@ export default function Home() {
         setUser({ ...lifeUser });
       }
     }
+  }
+
+  const downloadJSON = (filename: string): void => {
+    const link = anchorRef.current
+    if (!link) return
+
+    const blob = new Blob([JSON.stringify(user)], { type: 'application/json;charset=utf-8;' })
+    const url = URL.createObjectURL(blob)
+    link.setAttribute('href', url)
+    link.setAttribute('download', filename)
+    link.click()
   }
 
   return (
@@ -208,6 +182,8 @@ export default function Home() {
           <VitalityIndex />
         </section>
       </main>
+      <a ref={anchorRef} hidden ></a>
     </FileDropZone>
+
   );
 }
