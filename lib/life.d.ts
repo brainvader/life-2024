@@ -1,3 +1,5 @@
+import { LIFEOriginalFormat, LIFEOriginalKey } from "./life-original";
+
 export type Date = {
     yyyy: string,
     mm: string,
@@ -19,14 +21,14 @@ export type CareLevel =
 // 障害高齢者の日常生活自立度
 export type IndependenceLevelDisabilities =
     | "自立"
-    | "J1"
-    | "J2"
-    | "A1"
-    | "A2"
-    | "B1"
-    | "B2"
-    | "C1"
-    | "C2"
+    | "J１"
+    | "J２"
+    | "A１"
+    | "A２"
+    | "B１"
+    | "B２"
+    | "C１"
+    | "C２"
 
 // 認知症高齢者の日常生活自立度
 export type IndependenceLevelDementia =
@@ -38,6 +40,15 @@ export type IndependenceLevelDementia =
     | "Ⅲb"
     | "Ⅳ"
     | "M"
+
+// 評価時点
+export type EvaluationPoint = "サービス利用開始時" | "サービス利用中" | "サービス利用終了時";
+
+// 主訴
+export type Complaint = "発熱" | "転倒" | "その他";
+
+// 家族
+export type Family = | "同居" | "独居";
 
 // ADL全般
 export type ADLLevel = "自立" | "一部介助" | "全介助";
@@ -89,6 +100,7 @@ export type Rehabilitation =
 export type LIFEFormat = {
     // 【利用者情報】
     "名前": string,
+    "ふりがな": string,
     "生年月日": Date,
     "保険者番号": null | string,
     "被保険者番号": null | string,
@@ -99,19 +111,19 @@ export type LIFEFormat = {
     "障害高齢者の日常生活自立度": IndependenceLevelDisabilities,
     "認知症高齢者の日常生活自立度": IndependenceLevelDementia,
     "評価日": Date,
-    "評価時点": "サービス利用開始時" | "サービス利用中" | "サービス利用終了時"
+    "評価時点": EvaluationPoint
     //【総論】
     "診断名": string[],
     "緊急入院時の状況": {
         "入院日": Date,
-        "受療時の主訴": "発熱" | "転倒" | "その他",
+        "受療時の主訴": Complaint,
         "その他": string,
     }[],
     "服薬情報": {
         "薬剤名": string
     }[],
     // 家族
-    "家族の状況": "同居" | "独居" | null,
+    "家族の状況": "同居" | "独居" | "",
 
     // ADL
     "食事": ADLLevel,
@@ -142,10 +154,12 @@ export type LIFEFormat = {
     "認知症の診断": {
         "診断名": Dementia,
         "その他": string,
-    } | null,
+    }
     //【Vitality Index】
     "意思疎通": Communication,
     "起床": WakeUp,
     "排泄": Discharge,
     "リハビリ": Rehabilitation,
 }
+
+type LIFESharedFormat = LIFEOriginalKey & keyof LIFEFormat;

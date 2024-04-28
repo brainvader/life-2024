@@ -1,18 +1,19 @@
 'use client'
 
-import { DragEvent } from "react"
+import { DragEvent, ReactNode } from "react"
 
 interface FileDropZoneProps {
-    dragActive: boolean,
+    children: ReactNode,
+    // dragActive: boolean,
     dragHandler: (event: DragEvent<HTMLFormElement | HTMLDivElement>) => void
-    dropHandler: (event: DragEvent<HTMLDivElement>) => void
+    // dropHandler: (event: DragEvent<HTMLDivElement>) => void
 }
 
-export default function FileDropZone({ dragActive, dragHandler, dropHandler }: FileDropZoneProps) {
+export default function FileDropZone({ dragHandler, children }: FileDropZoneProps) {
 
     return (
         <form
-            className="h-64 w-[28rem] max-w-full relative text-center"
+            className="relative text-center"
             onDragEnter={dragHandler}
             onSubmit={(event) => {
                 event.preventDefault()
@@ -26,7 +27,8 @@ export default function FileDropZone({ dragActive, dragHandler, dropHandler }: F
                 // accept=".txt"
                 multiple
             />
-            <label
+            {children}
+            {/* <label
                 className="h-full flex items-center justify-center border-2 rounded-2xl border-dashed border-[#cbd5e1] bg-[#f8fafc]"
                 htmlFor="file-upload">
                 <div>
@@ -35,8 +37,8 @@ export default function FileDropZone({ dragActive, dragHandler, dropHandler }: F
                         アップロードするファイルを選択
                     </button>
                 </div>
-            </label>
-            {dragActive
+            </label> */}
+            {/* {dragActive
                 &&
                 <div
                     className="absolute w-full h-full rounded-2xl top-0 right-0 bottom-0 left-0"
@@ -45,7 +47,7 @@ export default function FileDropZone({ dragActive, dragHandler, dropHandler }: F
                     onDragLeave={dragHandler}
                     onDragOver={dragHandler}
                     onDrop={dropHandler}
-                ></div>}
+                ></div>} */}
         </form>
     )
 }

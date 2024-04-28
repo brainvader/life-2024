@@ -3,7 +3,9 @@
 import { SelectCell } from './ui/cell';
 import { ChangeEvent, useContext } from 'react';
 import { UserContext } from '@/lib/state/user-provider';
-import { Communication, COMMUNICATION, Dementia, DEMENTIA, Discharge, DISCHARGE, Rehabilitation, REHABILITATION, WAKE_UP, WakeUp } from '@/lib/definitions';
+import { Dementia } from '@/lib/life';
+
+export const DEMENTIA: Readonly<Dementia[]> = ["アルツハイマー病", "血管性認知症", "レビー小体病", "その他"]
 
 export default function DementiaInfo() {
     const { user, setUser } = useContext(UserContext)
@@ -13,9 +15,9 @@ export default function DementiaInfo() {
 
         setUser({
             ...user,
-            dementia: {
-                ...user.dementia,
-                type: newOption
+            ["認知症の診断"]: {
+                ...user["認知症の診断"],
+                ["診断名"]: newOption
             }
         })
     }
@@ -25,9 +27,9 @@ export default function DementiaInfo() {
 
         setUser({
             ...user,
-            dementia: {
-                ...user.dementia,
-                cause: newValue
+            ["認知症の診断"]: {
+                ...user["認知症の診断"],
+                ["その他"]: newValue
             }
         })
     }
@@ -37,18 +39,18 @@ export default function DementiaInfo() {
             <SelectCell
                 id='dementia'
                 labelText='認知症'
-                defaultValue={user.dementia.type}
-                options={DEMENTIA}
+                defaultValue={""}
+                options={[...DEMENTIA]}
                 cellSpan={{
                     labelSpan: { col: 1, row: 1 },
                     controlSpan: { col: 2, row: 1 }
                 }}
                 onChange={(event) => { selectDementia(event) }}
             />
-            {user.dementia.type === "その他" ?
+            {user["認知症の診断"]['診断名'] === "その他" ?
                 <div className="col-span">
                     <input className="w-full text-center"
-                        defaultValue={user.dementia.cause} placeholder="病名" onChange={(event) => { setdementiaCause(event) }} />
+                        defaultValue={user["認知症の診断"]["その他"]} placeholder="病名" onChange={(event) => { setdementiaCause(event) }} />
                 </div>
                 : <></>}
         </div>

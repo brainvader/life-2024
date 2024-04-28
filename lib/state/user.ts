@@ -3,6 +3,7 @@ import { LIFEFormat } from "../life";
 export const dummyUser: LIFEFormat = {
     // 【利用者情報】
     "名前": "",
+    "ふりがな": "",
     "生年月日": { yyyy: "2024", mm: "04", dd: "22" },
     "保険者番号": null,
     "被保険者番号": null,

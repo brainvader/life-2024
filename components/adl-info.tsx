@@ -31,7 +31,7 @@ export default function ADLInfo() {
 
     return (<>
         <h3 className="col-span-4 row-span-1 border-b-2 border-solid border-black  bg-gray-300 px-2">ADL</h3>
-        {Object.keys(user.adl).map((key, i) => {
+        {/* {Object.keys(user[""]).map((key, i) => {
             return (
                 <SelectCell
                     key={i}
@@ -45,7 +45,7 @@ export default function ADLInfo() {
                     }}
                     onChange={(event) => { setADL(event) }}
                 />)
-        })}
+        })} */}
     </>
     )
 }

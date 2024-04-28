@@ -1,18 +1,21 @@
 'use client'
 
-import { COMPLAINT, Complaint, FAMILY, Family, Hospitalizations } from "@/lib/definitions";
 import { UserContext } from "@/lib/state/user-provider"
 import { ChangeEvent, useContext } from "react";
 import { SelectCell } from "./ui/cell";
 import ADLInfo from "./adl-info";
 import Medicine from "./medicine";
+import { Complaint, Family } from "@/lib/life";
+
+export const COMPLAINT: Readonly<Complaint[]> = ["発熱", "転倒", "その他"] as const;
+export const FAMILY: Readonly<Family[]> = ["同居", "独居"] as const;
 
 export default function General() {
     const { user, setUser } = useContext(UserContext);
 
     function onDiagnosis(event: ChangeEvent<HTMLInputElement>, i: number) {
         const newValue = event.target.value;
-        const preDiagnosis = user.diagnosis;
+        const preDiagnosis = user["診断名"];
         const newDiagnosis = preDiagnosis.map((d, j) => {
             if (j === i) {
                 return newValue;
@@ -22,13 +25,14 @@ export default function General() {
 
         setUser({
             ...user,
-            diagnosis: newDiagnosis
+            ["診断名"]: newDiagnosis
         })
     }
 
     function onHospitalizationsDate(event: ChangeEvent<HTMLInputElement>, i: number) {
         const newDate = event.target.value.split('-');
-        const preHospitalizations = user.hospitalizations;
+        console.log(newDate);
+        const preHospitalizations = user["緊急入院時の状況"];
         const newHospitalizations = preHospitalizations.map((h, j) => {
             if (j === i) {
                 return {
@@ -41,14 +45,14 @@ export default function General() {
 
         setUser({
             ...user,
-            hospitalizations: newHospitalizations
+            ["緊急入院時の状況"]: newHospitalizations
         })
     }
 
     function onHospitalizationsComplain(event: ChangeEvent<HTMLSelectElement>, i: number) {
         const newComplain = event.target.value;
 
-        const preHospitalizations = user.hospitalizations;
+        const preHospitalizations = user["緊急入院時の状況"];
         const newHospitalizations = preHospitalizations.map((h, j) => {
             if (j === i) {
                 return {
@@ -61,19 +65,21 @@ export default function General() {
 
         setUser({
             ...user,
-            hospitalizations: newHospitalizations
+            ["緊急入院時の状況"]: newHospitalizations
         })
     }
 
     function setComplainReason(event: ChangeEvent<HTMLInputElement>, i: number) {
         const newReason = event.target.value;
 
-        const preHospitalizations = user.hospitalizations;
+        console.log(newReason);
+
+        const preHospitalizations = user["緊急入院時の状況"];
         const newHospitalizations = preHospitalizations.map((h, j) => {
             if (j === i) {
                 return {
                     ...h,
-                    reason: newReason
+                    ["その他"]: newReason
                 };
             }
             return h;
@@ -81,7 +87,7 @@ export default function General() {
 
         setUser({
             ...user,
-            hospitalizations: newHospitalizations
+            ["緊急入院時の状況"]: newHospitalizations
         })
     }
 
@@ -90,7 +96,7 @@ export default function General() {
 
         setUser({
             ...user,
-            family: newOption
+            ["家族の状況"]: newOption
         })
     }
 
@@ -100,7 +106,7 @@ export default function General() {
                 <p className="col-span-4 border-b-2 boder-solid border-black bg-gray-300">
                     診断名(特定疾病または生活機能低下の直接の原因となっている傷病名については1に記入)
                 </p>
-                {user.diagnosis.map((d, i) => {
+                {user["診断名"].map((d, i) => {
                     return (
                         <p key={i} className="col-span-4 flex p-2">
                             <label
@@ -119,9 +125,10 @@ export default function General() {
 
                 <p className="col-span-4 border-t-2 border-b-2 boder-solid border-black bg-gray-300">緊急入院の状況</p>
                 <div className="col-span-4 h-full border-b-2 border-solid border-black">
-                    {user.hospitalizations.map((h, i) => {
-                        const { start: { yyyy, mm, dd }, complaints
-                        }: Hospitalizations = h;
+                    {user["緊急入院時の状況"].map((h, i) => {
+                        const { yyyy, mm, dd } = h["入院日"];
+                        const complaint = h["受療時の主訴"];
+                        const reason = h["その他"]
                         return (
                             <p key={i} className="flex flex-row  flex-nowrap">
                                 <label className="w-2/6 box-border flex gap-2">
@@ -139,32 +146,32 @@ export default function General() {
                                         className="box-border text-center appearance-none mx-4"
                                         name="受療時の主訴"
                                         id="hp-complain"
-                                        defaultValue={complaints}
+                                        defaultValue={complaint}
                                         onChange={(event) => { onHospitalizationsComplain(event, i) }}>
                                         {COMPLAINT.map((c, j) => {
                                             return <option key={j} value={c}>{c}</option>
                                         })}
                                     </select>
-                                    {complaints === "その他" ?
-                                        <input value={h.reason} placeholder="理由" onChange={(event) => { setComplainReason(event, i) }} />
+                                    {complaint === "その他" ?
+                                        <input value={reason} placeholder="理由" onChange={(event) => { setComplainReason(event, i) }} />
                                         : <></>}
                                 </label>
-
                             </p >
                         )
                     })}
                 </div>
 
-                <Medicine />
+                {/* <Medicine /> */}
 
                 <SelectCell
                     id="family"
                     labelText="家族の状況（※）"
-                    defaultValue={user.family}
-                    options={FAMILY}
+                    defaultValue=""
+                    value={user["家族の状況"]}
+                    options={[...FAMILY]}
                     cellSpan={{
-                        labelSpan: { col: 1, row: 1 },
-                        controlSpan: { col: 3, row: 1 }
+                        labelSpan: { col: 2, row: 1 },
+                        controlSpan: { col: 2, row: 1 }
                     }}
                     onChange={(event) => { }}
                 />

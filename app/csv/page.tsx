@@ -94,7 +94,7 @@ export default function DataInput() {
     return (
         <div className="flex flex-col justify-center items-center">
             <h1 className="font-bold text-4xl mb-4">データ変換</h1>
-            <div>
+            {/* <div>
                 <h2 className="text-center font-bold text-2xl mb-4">対象ファイル: {name ? `(${name}.txt)` : ""}</h2>
                 <FileDropZone
                     dragActive={dragActive}
@@ -107,9 +107,8 @@ export default function DataInput() {
                 <div>
                     {load && <pre className="text-left mb-4">{JSON.stringify(user, null, 2)}</pre>}
                 </div>
-                {/* {values && <a href={`data:text/csv;charset=utf-8,${labels}\r\n${values}`} download={`${name}.csv`}>Save</a>} */}
                 {load && <a href={`data:text/text/json;charset=utf-8,${JSON.stringify(user, null, 2)}`} download={`${name}.json`}>Save</a>}
-            </div>
+            </div> */}
         </div>
     )
 }

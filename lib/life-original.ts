@@ -49,7 +49,7 @@ export const LIFEOriginalKeys: Readonly<LIFEOriginalKey[]> = [
     "リハビリ",
 ]
 
-export const LIFEOriginalUser: Record<LIFEOriginalKey, string> = {
+export const LIFEOriginalFormat: Record<LIFEOriginalKey, string> = {
     "障害高齢者の日常生活自立度": "",
     "認知症高齢者の日常生活自立度": "",
     "同居家族等": "",

@@ -17,7 +17,7 @@ type CellLabelProps = {
     labelText: string
 }
 
-function CellLabel({ id, labelText }: CellLabelProps) {
+export function CellLabel({ id, labelText }: CellLabelProps) {
     return (<label htmlFor={id}>{labelText}</label>)
 }
 
@@ -55,24 +55,26 @@ type SelectCellCellProps = {
     id: string,
     labelText: string,
     defaultValue?: string,
+    value: string,
     options: Readonly<string>[],
     cellSpan: CellSpan,
     onChange: (event: ChangeEvent<HTMLSelectElement>) => void
 }
 
-export function SelectCell({ id, labelText, defaultValue, options, cellSpan, onChange }: SelectCellCellProps) {
+export function SelectCell({ id, labelText, defaultValue, value, options, cellSpan, onChange }: SelectCellCellProps) {
     const { labelSpan, controlSpan } = cellSpan;
 
     return (
         <>
-            <div className={`col-span-${labelSpan.col} row-span-${labelSpan.row} border-r-2 border-b-2 border-solid border-black pl-1`}>
+            <div className={`box-border block w-full col-span-${labelSpan.col} row-span-${labelSpan.row} border-r-2 border-b-2 border-solid border-black pl-1`}>
                 <CellLabel id={id} labelText={labelText} />
             </div>
-            <div className={`col-span-${controlSpan.col} row-span-${controlSpan.row} border-r-2 border-b-2 border-solid border-black`}>
+            <div className={`w-full col-span-${controlSpan.col} row-span-${controlSpan.row} border-r-2 border-b-2 border-solid border-black`}>
                 <select
-                    className="w-full text-center bg-white appearance-none"
+                    className="block w-full text-center bg-white appearance-none"
                     id={id}
                     defaultValue={defaultValue!}
+                    value={value}
                     onChange={(event) => onChange(event)}>
                     {options.map((option, i) => {
                         return (<option key={i} value={option}>{option}</option>)
