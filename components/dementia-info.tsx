@@ -39,7 +39,7 @@ export default function DementiaInfo() {
             <SelectCell
                 id='dementia'
                 labelText='認知症'
-                defaultValue={""}
+                value={user["認知症の診断"]["診断名"]}
                 options={[...DEMENTIA]}
                 cellSpan={{
                     labelSpan: { col: 1, row: 1 },
@@ -47,12 +47,20 @@ export default function DementiaInfo() {
                 }}
                 onChange={(event) => { selectDementia(event) }}
             />
-            {user["認知症の診断"]['診断名'] === "その他" ?
+            <div className="col-span">
+                <input className="w-full text-center"
+                    defaultValue={user["認知症の診断"]["その他"]}
+                    placeholder="病名"
+                    onChange={(event) => { setdementiaCause(event) }}
+                    disabled={user["認知症の診断"]["診断名"] === "その他" ? false : true}
+                />
+            </div>
+            {/* {user["認知症の診断"]['診断名'] === "その他" ?
                 <div className="col-span">
                     <input className="w-full text-center"
                         defaultValue={user["認知症の診断"]["その他"]} placeholder="病名" onChange={(event) => { setdementiaCause(event) }} />
                 </div>
-                : <></>}
+                : <></>} */}
         </div>
     )
 }
