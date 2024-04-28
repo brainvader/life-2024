@@ -14,13 +14,6 @@ export const EVALUATION_POINT: Readonly<EvaluationPoint>[] = ["サービス利�
 export default function BasicInfo() {
     const { user, setUser } = useContext(UserContext);
 
-    const key = user["認知症高齢者の日常生活自立度"];
-    INDEPENDENCE_LEVEL_DEMENTIA.map((d) => {
-        if (d === key) {
-            console.log(`level: ${key}`);
-        }
-    })
-
     const selectCareLevel = (event: ChangeEvent<HTMLSelectElement>) => {
         const newValue = event.target.value as CareLevel;
 
