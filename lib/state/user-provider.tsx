@@ -2,11 +2,11 @@
 
 import { createContext, useState, Dispatch, SetStateAction } from "react";
 import { dummyUser } from "./user";
-import { User } from "../definitions";
+import { LIFEFormat } from "../life";
 
 type UserContext = {
-    user: User,
-    setUser: Dispatch<SetStateAction<User>>
+    user: LIFEFormat,
+    setUser: Dispatch<SetStateAction<LIFEFormat>>
 }
 
 export const UserContext = createContext<UserContext>({

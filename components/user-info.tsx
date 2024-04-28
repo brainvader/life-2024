@@ -1,22 +1,23 @@
 'use client'
 
-import { SEX, Sex } from "@/lib/definitions"
 import { UserContext } from "@/lib/state/user-provider"
 import { ChangeEvent, useContext } from "react"
 import { SelectCell, TextInputCell } from "./ui/cell";
+import { Sex } from "@/lib/life";
 
+const SEX: Readonly<Sex[]> = ["男", "女"] as const
 
 export default function UserInfo() {
     const { user, setUser } = useContext(UserContext);
 
-    const { yyyy, mm, dd } = user.birthday;
+    const { yyyy, mm, dd } = user["生年月日"];
 
     const setName = (event: ChangeEvent<HTMLInputElement>) => {
         const newName = event.target.value;
 
         setUser({
             ...user,
-            name: newName,
+            ["名前"]: newName,
         })
     }
 
@@ -25,7 +26,7 @@ export default function UserInfo() {
 
         setUser({
             ...user,
-            kana: newKana,
+            ["ふりがな"]: newKana,
         })
     }
 
@@ -35,7 +36,7 @@ export default function UserInfo() {
 
         setUser({
             ...user,
-            birthday: {
+            ["生年月日"]: {
                 yyyy: yyyy,
                 mm: mm,
                 dd: dd
@@ -48,7 +49,7 @@ export default function UserInfo() {
 
         setUser({
             ...user,
-            sex: newOption
+            ["性別"]: newOption
         })
     }
 
@@ -57,7 +58,7 @@ export default function UserInfo() {
 
         setUser({
             ...user,
-            insurerNumber: newInsurerNumber,
+            ["保険者番号"]: newInsurerNumber,
         })
     }
 
@@ -66,18 +67,18 @@ export default function UserInfo() {
 
         setUser({
             ...user,
-            insuredNumber: newInsuredNumber,
+            ["被保険者番号"]: newInsuredNumber,
         })
     }
 
     return (
-        <div className="grid grid-cols-4 grid-rows-3 border-4 border-solid border-black box-border">
+        <div className="grid grid-cols-4 grid-row-3 box-border">
             {/* first row */}
             <TextInputCell
                 type="text"
                 id="user-name"
                 labelText="氏名"
-                defaultValue={user.name}
+                defaultValue={user["名前"]}
                 cellSpan={
                     {
                         labelSpan: { col: 1, row: 1 },
@@ -89,7 +90,7 @@ export default function UserInfo() {
                 type="text"
                 id="user-kana"
                 labelText="ふりがな"
-                defaultValue={user.kana}
+                defaultValue={user["ふりがな"]}
                 cellSpan={
                     {
                         labelSpan: { col: 1, row: 1 },
@@ -115,7 +116,7 @@ export default function UserInfo() {
                 type="text"
                 id="insurer-number"
                 labelText="保険者番号"
-                defaultValue={user.insurerNumber}
+                defaultValue={user["保険者番号"] ? user["保険者番号"] : ""}
                 cellSpan={
                     {
                         labelSpan: { col: 1, row: 1 },
@@ -128,7 +129,8 @@ export default function UserInfo() {
             <SelectCell
                 id="sex"
                 labelText="性別"
-                options={SEX}
+                value={user["性別"]}
+                options={[...SEX]}
                 cellSpan={
                     {
                         labelSpan: { col: 1, row: 1 },
@@ -140,7 +142,7 @@ export default function UserInfo() {
                 type="text"
                 id="insured-number"
                 labelText="被保険者番号"
-                defaultValue={user.insuredNumber}
+                defaultValue={user["被保険者番号"] ? user["被保険者番号"] : ""}
                 cellSpan={
                     {
                         labelSpan: { col: 1, row: 1 },

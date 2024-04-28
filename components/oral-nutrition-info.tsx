@@ -1,9 +1,12 @@
 'use client'
 
-import { CHOKE, Choke, DENTURE, Denture, GUM, Gum, STAIN, Stain } from '@/lib/definitions'
+// import { CHOKE, Choke, DENTURE, Denture, GUM, Gum, STAIN, Stain } from '@/lib/definitions'
 import { SelectCell, TextInputCell } from './ui/cell'
 import { ChangeEvent, useContext } from 'react';
 import { UserContext } from '@/lib/state/user-provider';
+import { YesNo } from '@/lib/life';
+
+export const YES_NO: Readonly<YesNo[]> = ["あり", "なし"];
 
 export default function OralNutritionInfo() {
     const { user, setUser } = useContext(UserContext);
@@ -13,7 +16,7 @@ export default function OralNutritionInfo() {
 
         setUser({
             ...user,
-            height: newHeight,
+            ["身長"]: `${newHeight}`,
         })
     }
 
@@ -22,53 +25,53 @@ export default function OralNutritionInfo() {
 
         setUser({
             ...user,
-            weight: newWegith,
+            ["体重"]: `${newWegith}`,
         })
     }
 
     const selectDenture = (event: ChangeEvent<HTMLSelectElement>) => {
-        const newOption = event.target.value as Denture;
+        const newOption = event.target.value as YesNo;
 
         setUser({
             ...user,
-            denture: newOption
+            ["義歯の使用"]: newOption
         })
     }
 
     const selectChoke = (event: ChangeEvent<HTMLSelectElement>) => {
-        const newOption = event.target.value as Choke;
+        const newOption = event.target.value as YesNo;
 
         setUser({
             ...user,
-            choke: newOption
+            ["むせ"]: newOption
         })
     }
 
     const selectStain = (event: ChangeEvent<HTMLSelectElement>) => {
-        const newOption = event.target.value as Stain;
+        const newOption = event.target.value as YesNo;
 
         setUser({
             ...user,
-            stain: newOption
+            ["歯の汚れ"]: newOption
         })
     }
 
     const selectGum = (event: ChangeEvent<HTMLSelectElement>) => {
-        const newOption = event.target.value as Gum;
+        const newOption = event.target.value as YesNo;
 
         setUser({
             ...user,
-            gum: newOption
+            ["歯肉の腫れ出血"]: newOption
         })
     }
 
     return (
-        <div className="grid grid-cols-4 grid-rows-3 border-4 border-solid border-black box-border">
+        <div className="grid grid-cols-4 grid-rows-3 box-border">
             <TextInputCell
                 type='text'
                 id='height'
                 labelText='身長'
-                defaultValue={`${user.height}`}
+                defaultValue={`${user["身長"]}`}
                 cellSpan={{
                     labelSpan: { col: 1, row: 1 },
                     controlSpan: { col: 1, row: 1 }
@@ -79,7 +82,7 @@ export default function OralNutritionInfo() {
                 type='text'
                 id='weight'
                 labelText='体重'
-                defaultValue={`${user.weight}`}
+                defaultValue={`${user["体重"]}`}
                 cellSpan={{
                     labelSpan: { col: 1, row: 1 },
                     controlSpan: { col: 1, row: 1 }
@@ -89,7 +92,8 @@ export default function OralNutritionInfo() {
             <SelectCell
                 id='denture'
                 labelText='義歯の使用'
-                options={DENTURE}
+                value={user["義歯の使用"]}
+                options={[...YES_NO]}
                 cellSpan={{
                     labelSpan: { col: 1, row: 1 },
                     controlSpan: { col: 1, row: 1 }
@@ -100,7 +104,8 @@ export default function OralNutritionInfo() {
             <SelectCell
                 id='choke'
                 labelText='むせ'
-                options={CHOKE}
+                value={user["むせ"]}
+                options={[...YES_NO]}
                 cellSpan={{
                     labelSpan: { col: 1, row: 1 },
                     controlSpan: { col: 1, row: 1 }
@@ -111,7 +116,8 @@ export default function OralNutritionInfo() {
             <SelectCell
                 id='stain'
                 labelText='歯の汚れ'
-                options={STAIN}
+                value={user["歯の汚れ"]}
+                options={[...YES_NO]}
                 cellSpan={{
                     labelSpan: { col: 1, row: 1 },
                     controlSpan: { col: 1, row: 1 }
@@ -121,8 +127,9 @@ export default function OralNutritionInfo() {
 
             <SelectCell
                 id='stain'
-                labelText='歯肉の腫れ・出血'
-                options={GUM}
+                labelText='歯肉の腫れ出血'
+                value={user["歯肉の腫れ出血"]}
+                options={[...YES_NO]}
                 cellSpan={{
                     labelSpan: { col: 1, row: 1 },
                     controlSpan: { col: 1, row: 1 }
