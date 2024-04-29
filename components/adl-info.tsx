@@ -16,13 +16,15 @@ type LIFEADLkey =
 const ADL_LEVEL: Record<ADLLevel, string> = {
     "自立": "10",
     "一部介助": "5",
-    "全介助": "0"
+    "全介助": "0",
+    "": ""
 };
 
 const GROOM_LEVEL: Record<ADLLevel, string> = {
     "自立": "5",
     "一部介助": "0",
-    "全介助": "0"
+    "全介助": "0",
+    "": ""
 }
 
 const BATH_LEVEL = { ...GROOM_LEVEL }
@@ -31,12 +33,14 @@ const TRANSFER_LEVEL: Record<TransferLevel, string> = {
     "自立": "15",
     "監視下": "10",
     "座れるが移れない": "5",
-    "全介助": "0"
+    "全介助": "0",
+    "": ""
 }
 
 const WALK_LEVEL: Record<WalkLevel, string> = {
     "自立": "15",
-    "歩行器等": "10"
+    "歩行器等": "10",
+    "": ""
 }
 
 type ADLItemProps = {
@@ -44,6 +48,13 @@ type ADLItemProps = {
     label: string,
     levelMap: typeof ADL_LEVEL
     onChange: (event: ChangeEvent<HTMLSelectElement>) => void;
+}
+
+function adlOptionLabel(level: string, point: string) {
+    if (!level && !point) {
+        return ``
+    }
+    return `${level} (${point})`
 }
 
 function ADLItem({ user, label, levelMap, onChange }: ADLItemProps) {
@@ -54,10 +65,10 @@ function ADLItem({ user, label, levelMap, onChange }: ADLItemProps) {
         <SelectCell
             id={label}
             labelText={label}
-            value={`${userLevel} (${levelMap[userLevel]})`}
+            value={adlOptionLabel(userLevel, levelMap[userLevel])}
             options={Object.entries(levelMap).map((pair) => {
                 const [level, point] = pair;
-                return `${level} (${point})`
+                return adlOptionLabel(level, point)
             })}
             cellSpan={{
                 labelSpan: { col: 1, row: 1 },
@@ -117,10 +128,10 @@ export default function ADLInfo() {
                 <SelectCell
                     id="椅子とベッド間の移乗"
                     labelText="椅子とベッド間の移乗"
-                    value={`${user["椅子とベッド間の移乗"]} (${TRANSFER_LEVEL[user["椅子とベッド間の移乗"]]})`}
+                    value={adlOptionLabel(user["椅子とベッド間の移乗"], TRANSFER_LEVEL[user["椅子とベッド間の移乗"]])}
                     options={Object.entries(TRANSFER_LEVEL).map((pair) => {
                         const [level, point] = pair;
-                        return `${level} (${point})`
+                        return adlOptionLabel(level, point)
                     })}
                     cellSpan={{
                         labelSpan: { col: 1, row: 1 },
@@ -132,10 +143,10 @@ export default function ADLInfo() {
                 <SelectCell
                     id="整容"
                     labelText="整容"
-                    value={`${user["整容"]} (${GROOM_LEVEL[user["整容"]]})`}
+                    value={adlOptionLabel(user["整容"], GROOM_LEVEL[user["整容"]])}
                     options={Object.entries(GROOM_LEVEL).map((pair) => {
                         const [level, point] = pair;
-                        return `${level} (${point})`
+                        return adlOptionLabel(level, point)
                     })}
                     cellSpan={{
                         labelSpan: { col: 1, row: 1 },
@@ -153,10 +164,10 @@ export default function ADLInfo() {
                 <SelectCell
                     id="入浴"
                     labelText="入浴"
-                    value={`${user["入浴"]} (${BATH_LEVEL[user["入浴"]]})`}
+                    value={adlOptionLabel(user["入浴"], BATH_LEVEL[user["入浴"]])}
                     options={Object.entries(BATH_LEVEL).map((pair) => {
                         const [level, point] = pair;
-                        return `${level} (${point})`
+                        return adlOptionLabel(level, point)
                     })}
                     cellSpan={{
                         labelSpan: { col: 1, row: 1 },
@@ -168,10 +179,10 @@ export default function ADLInfo() {
                 <SelectCell
                     id="平地歩行"
                     labelText="平地歩行"
-                    value={`${user["平地歩行"]} (${WALK_LEVEL[user["平地歩行"]]})`}
+                    value={adlOptionLabel(user["平地歩行"], WALK_LEVEL[user["平地歩行"]])}
                     options={Object.entries(WALK_LEVEL).map((pair) => {
                         const [level, point] = pair;
-                        return `${level} (${point})`
+                        return adlOptionLabel(level, point)
                     })}
                     cellSpan={{
                         labelSpan: { col: 1, row: 1 },

@@ -5,7 +5,7 @@ import { ChangeEvent, useContext } from "react"
 import { SelectCell, TextInputCell } from "./ui/cell";
 import { Sex } from "@/lib/life";
 
-const SEX: Readonly<Sex[]> = ["男", "女"] as const
+const SEX: Readonly<Sex[]> = ["男", "女", ""] as const
 
 export default function UserInfo() {
     const { user, setUser } = useContext(UserContext);
