@@ -5,7 +5,7 @@ import { ChangeEvent, useContext } from "react";
 import { SelectCell } from "./ui/cell";
 import ADLInfo from "./adl-info";
 import Medicine from "./medicine";
-import { Complaint, EndReason, Family } from "@/lib/life";
+import { Complaint, Family } from "@/lib/life";
 import ServiceEnd from "./service-end";
 
 const COMPLAINT: Readonly<Complaint[]> = ["発熱", "転倒", "その他", ""] as const;
