@@ -5,7 +5,7 @@ import { ChangeEvent, useContext } from 'react';
 import { UserContext } from '@/lib/state/user-provider';
 import { Dementia } from '@/lib/life';
 
-export const DEMENTIA: Readonly<Dementia[]> = ["アルツハイマー病", "血管性認知症", "レビー小体病", "その他"]
+export const DEMENTIA: Readonly<Dementia[]> = ["アルツハイマー病", "血管性認知症", "レビー小体病", "その他", ""]
 
 export default function DementiaInfo() {
     const { user, setUser } = useContext(UserContext)

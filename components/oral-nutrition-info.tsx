@@ -6,7 +6,7 @@ import { ChangeEvent, useContext } from 'react';
 import { UserContext } from '@/lib/state/user-provider';
 import { YesNo } from '@/lib/life';
 
-export const YES_NO: Readonly<YesNo[]> = ["あり", "なし"];
+export const YES_NO: Readonly<YesNo[]> = ["あり", "なし", ""];
 
 export default function OralNutritionInfo() {
     const { user, setUser } = useContext(UserContext);

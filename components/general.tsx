@@ -5,21 +5,11 @@ import { ChangeEvent, useContext } from "react";
 import { SelectCell } from "./ui/cell";
 import ADLInfo from "./adl-info";
 import Medicine from "./medicine";
-import { Complaint, EndReason, Family } from "@/lib/life";
+import { Complaint, Family } from "@/lib/life";
 import ServiceEnd from "./service-end";
 
-const COMPLAINT: Readonly<Complaint[]> = ["発熱", "転倒", "その他"] as const;
-const FAMILY: Readonly<Family[]> = ["同居", "独居"] as const;
-const END_REASON: Readonly<EndReason[]> = [
-    "居宅サービスの利用",
-    "介護老人福祉施設入所",
-    "介護老人保健施設入所",
-    "介護医療院入所",
-    "医療機関入院",
-    "死亡",
-    "介護サービス利用をしなくなった",
-    "その他"
-]
+const COMPLAINT: Readonly<Complaint[]> = ["発熱", "転倒", "その他", ""] as const;
+const FAMILY: Readonly<Family[]> = ["同居", "独居", ""] as const;
 
 export default function General() {
     const { user, setUser } = useContext(UserContext);
