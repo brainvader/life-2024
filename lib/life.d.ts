@@ -88,8 +88,8 @@ export type Dementia =
 // Vitality Index
 //意思疎通
 export type Communication =
-    | "自分から挨拶する、話しかける"
-    | "挨拶、呼びかけに対して返答や笑顔が見られる"
+    | "自分から挨拶する、話し掛ける"
+    | "挨拶、呼びかけに対して返答や笑顔がみられる"
     | "反応がない"
     | ""
 
