@@ -11,7 +11,8 @@ const END_REASON: Readonly<EndReason[]> = [
     "医療機関入院",
     "死亡",
     "介護サービス利用をしなくなった",
-    "その他"
+    "その他",
+    ""
 ]
 
 const LIFEKey: keyof LIFEFormat & "サービス利用終了理由" = "サービス利用終了理由";

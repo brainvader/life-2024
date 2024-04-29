@@ -4,12 +4,11 @@ import { SelectCell } from './ui/cell';
 import { ChangeEvent, useContext } from 'react';
 import { UserContext } from '@/lib/state/user-provider';
 import { Communication, Discharge, Rehabilitation, WakeUp } from '@/lib/life';
-// import { Communication, COMMUNICATION, Discharge, DISCHARGE, Rehabilitation, REHABILITATION, WAKE_UP, WakeUp } from '@/lib/definitions';
 
-const COMMUNICATION: Readonly<Communication[]> = ["自分から挨拶する、話しかける", "挨拶、呼びかけに対して返答や笑顔が見られる", "反応がない"]
-const WAKE_UP: Readonly<WakeUp[]> = ["いつも定時に起床している", "起こさないと起床しないことがある", "自分から起床することはない"]
-const DISCHARGE: Readonly<Discharge[]> = ["いつも自ら便意尿意を伝える、あるいは自分で排尿、排便を行う", "時々、尿意便意を伝える", "排便に全く関心がない"]
-const REHABILITATION: Readonly<Rehabilitation[]> = ["自らリハビリに向かう、活動を求める", "促されて向かう", "拒否、無関心"]
+const COMMUNICATION: Readonly<Communication[]> = ["自分から挨拶する、話しかける", "挨拶、呼びかけに対して返答や笑顔が見られる", "反応がない", ""]
+const WAKE_UP: Readonly<WakeUp[]> = ["いつも定時に起床している", "起こさないと起床しないことがある", "自分から起床することはない", ""]
+const DISCHARGE: Readonly<Discharge[]> = ["いつも自ら便意尿意を伝える、あるいは自分で排尿、排便を行う", "時々、尿意便意を伝える", "排泄に全く関心がない", ""]
+const REHABILITATION: Readonly<Rehabilitation[]> = ["自らリハビリに向かう、活動を求める", "促されて向かう", "拒否、無関心", ""]
 
 export default function VitalityIndex() {
     const { user, setUser } = useContext(UserContext)

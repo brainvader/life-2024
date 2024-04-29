@@ -16,13 +16,15 @@ type LIFEADLkey =
 const ADL_LEVEL: Record<ADLLevel, string> = {
     "自立": "10",
     "一部介助": "5",
-    "全介助": "0"
+    "全介助": "0",
+    "": ""
 };
 
 const GROOM_LEVEL: Record<ADLLevel, string> = {
     "自立": "5",
     "一部介助": "0",
-    "全介助": "0"
+    "全介助": "0",
+    "": ""
 }
 
 const BATH_LEVEL = { ...GROOM_LEVEL }
@@ -31,12 +33,14 @@ const TRANSFER_LEVEL: Record<TransferLevel, string> = {
     "自立": "15",
     "監視下": "10",
     "座れるが移れない": "5",
-    "全介助": "0"
+    "全介助": "0",
+    "": ""
 }
 
 const WALK_LEVEL: Record<WalkLevel, string> = {
     "自立": "15",
-    "歩行器等": "10"
+    "歩行器等": "10",
+    "": ""
 }
 
 type ADLItemProps = {
